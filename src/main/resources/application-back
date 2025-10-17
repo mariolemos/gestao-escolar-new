@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    username: ${dbUser:admin}
+    url: jdbc:mysql://localhost/gestao_escolar_new?createDatabaseIfNotExist=true&serverTimezone=UTC
+    password: ${dbPass:123456}
+  jpa:
+    properties:
+      hibernate:
+    show-sql: 'true'

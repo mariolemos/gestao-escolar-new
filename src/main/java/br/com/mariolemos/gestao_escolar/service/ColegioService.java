@@ -12,7 +12,7 @@ public class ColegioService {
 
     @Autowired
     private ColegioRepository colegioRepository;
-    @Autowired
+   // @Autowired
    // private ContatoService contatoService;
 
     public List<Colegio> buscar(){
