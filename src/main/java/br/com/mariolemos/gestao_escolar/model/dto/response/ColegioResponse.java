@@ -16,18 +16,11 @@ public class ColegioResponse {
 
     private Long id;
     private String nome;
-    private LocalTime horario;
-    private String aluno;
-//    private List<Contato> contatos = new ArrayList<>();
-//    private Endereco endereco;
+    private String horario;
 
     public ColegioResponse(Colegio colegio){
         this.id = colegio.getId();
         this.nome = colegio.getNome();
         this.horario = colegio.getHorario();
-        this.horario = colegio.getHorario();
-//        this.contatos = colegio.getContatos();
-//        this.endereco = colegio.getEndereco();
-
     }
 }

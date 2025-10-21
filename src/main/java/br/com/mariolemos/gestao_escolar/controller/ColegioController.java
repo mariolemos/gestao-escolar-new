@@ -1,8 +1,10 @@
 package br.com.mariolemos.gestao_escolar.controller;
 
 import br.com.mariolemos.gestao_escolar.model.Colegio;
+import br.com.mariolemos.gestao_escolar.model.dto.request.ColegioRequest;
 import br.com.mariolemos.gestao_escolar.model.dto.response.ColegioResponse;
 import br.com.mariolemos.gestao_escolar.service.ColegioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,9 +36,9 @@ public class ColegioController {
     }
 
     @PostMapping
-    public ResponseEntity<Colegio> incluir(@RequestBody Colegio colegio){
-        colegio = colegioService.incluir(colegio);
-        return ResponseEntity.ok().body(colegio);
+    public ResponseEntity<ColegioResponse> incluir(@RequestBody @Valid ColegioRequest colegioRequest){
+        Colegio colegio = colegioService.incluir(ColegioRequest.of(colegioRequest));
+        return ResponseEntity.ok().body(new ColegioResponse(colegio));
     }
 
     @DeleteMapping(value = "/{id}")

@@ -25,7 +25,7 @@ public class Colegio {
     @Column(name = "NOME")
     private String nome;
     @Column(name = "HORARIO")
-    private LocalTime horario;
+    private String horario;
 //    @OneToMany
 //    @JsonIgnore
 //    @JoinColumn(name = "COLEGIO_ID")
