@@ -1,13 +1,8 @@
 package br.com.mariolemos.gestao_escolar.model.dto.response;
-
 import br.com.mariolemos.gestao_escolar.model.Colegio;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @AllArgsConstructor

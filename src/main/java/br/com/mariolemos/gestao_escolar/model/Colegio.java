@@ -1,13 +1,10 @@
 package br.com.mariolemos.gestao_escolar.model;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,14 +23,15 @@ public class Colegio {
     private String nome;
     @Column(name = "HORARIO")
     private String horario;
-//    @OneToMany
-//    @JsonIgnore
-//    @JoinColumn(name = "COLEGIO_ID")
-//    private List<Aluno> alunos = new ArrayList<Aluno>();
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "COLEGIO_ID")
-//    private List<Contato> contatos = new ArrayList<Contato>();
-//    @OneToOne(mappedBy = "colegio")
-//    private Endereco endereco;
+    @OneToMany(mappedBy = "colegio", cascade = CascadeType.ALL)
+    private List<Contato> contatos = new ArrayList<Contato>();
+    @OneToOne(mappedBy = "colegio", cascade = CascadeType.ALL)
+    private Endereco endereco;
+
+    @PrePersist
+    private void prePersist(){
+        this.endereco.setColegio(this);
+        this.contatos.forEach(contato -> contato.setColegio(this));
+    }
 
 }
