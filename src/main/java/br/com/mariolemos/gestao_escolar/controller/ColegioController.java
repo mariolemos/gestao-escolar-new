@@ -19,9 +19,9 @@ public class ColegioController {
     private ColegioService colegioService;
 
     @GetMapping
-    public ResponseEntity<List<Colegio>> buscar(){
+    public ResponseEntity<List<ColegioResponse>> buscar(){
         List<Colegio> colegios = colegioService.buscar();
-        return ResponseEntity.ok().body(colegios);
+        return ResponseEntity.ok().body(ColegioResponse.of(colegios));
     }
     @GetMapping("/{id}")
     public ResponseEntity<ColegioResponse> buscarPorID(@PathVariable("id") Long id){
