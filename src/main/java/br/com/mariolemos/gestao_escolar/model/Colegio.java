@@ -23,11 +23,15 @@ public class Colegio {
     private String nome;
     @Column(name = "HORARIO")
     private String horario;
-    @OneToMany(mappedBy = "colegio", cascade = CascadeType.ALL)
+    //@OneToMany(mappedBy = "colegio", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany
+    @JoinColumn(name = "COLEGIO_ID")
     private List<Contato> contatos = new ArrayList<Contato>();
     @OneToOne(mappedBy = "colegio", cascade = CascadeType.ALL)
     private Endereco endereco;
-
+    @OneToMany
+    @JoinColumn(name = "COLEGIO_ID")
+    private List<Aluno> alunos = new ArrayList<>();
     @PrePersist
     private void prePersist(){
         this.endereco.setColegio(this);

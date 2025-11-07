@@ -25,7 +25,7 @@ public class Contato {
     @Column(name = "TIPO_CONTATO")
     @Enumerated(EnumType.STRING)
     private TipoContato tipo;
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "COLEGIO_ID")
     private Colegio colegio;
 }
