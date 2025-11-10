@@ -40,6 +40,8 @@ public class Contrato {
     private Integer diaPagamento;
     @Column(name = "VALOR_MENSAL")
     private BigDecimal valorMensal;
+    @ManyToOne
+    private Responsavel responsavel;
 
     public void calcularMensalidade() {
         int parcelas = dtFinal.getMonthValue() - dtInicial.getMonthValue() + 1;

@@ -2,9 +2,7 @@ package br.com.mariolemos.gestao_escolar.controller;
 
 import br.com.mariolemos.gestao_escolar.model.Aluno;
 import br.com.mariolemos.gestao_escolar.model.dto.response.AlunoResponse;
-import br.com.mariolemos.gestao_escolar.model.dto.response.ContatoResponse;
 import br.com.mariolemos.gestao_escolar.service.AlunoService;
-import br.com.mariolemos.gestao_escolar.service.ContatoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

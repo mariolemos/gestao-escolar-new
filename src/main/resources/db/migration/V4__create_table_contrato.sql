@@ -10,6 +10,7 @@ create table `CONTRATO`(
         CONTATO VARCHAR(100),
         DIA_PAGAMENTO INTEGER,
         VALOR_MENSAL FLOAT
+
     );
 
 

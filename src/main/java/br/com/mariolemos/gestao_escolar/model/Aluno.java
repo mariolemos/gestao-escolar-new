@@ -38,6 +38,5 @@ public class Aluno extends Pessoa{
     @ManyToOne
     private Colegio colegio;
     @ManyToOne
-    @JoinColumn(name = "RESPONSAVEL_ID")
     private Responsavel responsavel;
 }

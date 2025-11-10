@@ -23,7 +23,7 @@ public class ResponsavelResponse extends PessoaDto {
     private List<Contrato> contratos = new ArrayList<>();
     private List<Aluno> alunos = new ArrayList<>();
 
-    public ResponsavelResponse of(Responsavel responsavel) {
+    public ResponsavelResponse(Responsavel responsavel) {
         this.id = responsavel.getId();
         this.parentesco = responsavel.getParentesco();
 
@@ -31,21 +31,26 @@ public class ResponsavelResponse extends PessoaDto {
         super.setRg(responsavel.getRg());
         super.setCpf(responsavel.getCpf());
         super.setDataNascimento(responsavel.getDataNascimento());
-
-        if (responsavel.getContratos() != null) {
-            this.contratos = responsavel.getContratos();
-        }
-
-        if (responsavel.getAlunos() != null) {
-            this.alunos = responsavel.getAlunos();
-        }
-        return null;
-
     }
 
-//    public static List<ResponsavelResponse> of(List<Responsavel> responsaveis) {
-//        return responsaveis.stream().map(Responsavel resp -> new ResponsavelResponse(resp)).collect(Collectors.toList());
+//    public ResponsavelResponse of(Responsavel responsavel) {
+//
+//
+//        if (responsavel.getContratos() != null) {
+//            this.contratos = responsavel.getContratos();
+//        }
+//
+//        if (responsavel.getAlunos() != null) {
+//            this.alunos = responsavel.getAlunos();
+//        }
+//        return ;
+//
 //    }
+
+    public static List<ResponsavelResponse> of(List<Responsavel> responsaveis) {
+        //return responsaveis.stream().map(Responsavel resp -> new ResponsavelResponse(resp)).collect(Collectors.toList());
+        return responsaveis.stream().map(ResponsavelResponse::new).collect(Collectors.toList());
+    }
 
 
 }
