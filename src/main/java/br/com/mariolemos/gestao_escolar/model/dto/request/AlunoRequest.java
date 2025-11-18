@@ -44,7 +44,7 @@ public class AlunoRequest extends PessoaDto {
        aluno.setNome(alunoRequest.getNome());
        aluno.setCpf(alunoRequest.getCpf());
        aluno.setRg(alunoRequest.getRg());
-       aluno.setDataNascimento(alunoRequest.getDataNascimento());
+      // aluno.setDataNascimento(alunoRequest.getDataNascimento());
        aluno.setTurno(alunoRequest.getTurno());
        aluno.setSerie(alunoRequest.getSerie());
        aluno.setTurma(alunoRequest.getTurma());

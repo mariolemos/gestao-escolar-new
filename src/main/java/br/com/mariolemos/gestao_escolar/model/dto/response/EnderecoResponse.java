@@ -32,6 +32,9 @@ public class EnderecoResponse {
         this.estado = endereco.getEstado();
     }
      public static EnderecoResponse of(Endereco endereco) {
+        if(endereco == null) {
+            return new EnderecoResponse();
+        }
         return new EnderecoResponse(endereco);
      }
 }

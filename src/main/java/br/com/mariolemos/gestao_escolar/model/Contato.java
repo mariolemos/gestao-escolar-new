@@ -28,4 +28,7 @@ public class Contato {
     @ManyToOne()
     @JoinColumn(name = "COLEGIO_ID")
     private Colegio colegio;
+    @ManyToOne()
+    @JoinColumn(name = "PESSOA_ID")
+    private Pessoa pessoa;
 }

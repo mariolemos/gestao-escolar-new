@@ -21,12 +21,9 @@ public class Responsavel extends Pessoa{
     private Long id;
     @Column(name = "PARENTESCO")
     private String parentesco;
+    //private List<Contrato> contratos = new ArrayList<>();
     @OneToMany
-    //@Column(name = "CONTRATOS")
     @JoinColumn(name = "RESPONSAVEL_ID")
-    private List<Contrato> contratos = new ArrayList<>();
-    @OneToMany
-    @JoinColumn(name = "ALUNO_ID")
     private List<Aluno> alunos = new ArrayList<>();
 
 }

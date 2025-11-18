@@ -1,9 +1,6 @@
 package br.com.mariolemos.gestao_escolar.model.dto.response;
 
-import br.com.mariolemos.gestao_escolar.model.Aluno;
-import br.com.mariolemos.gestao_escolar.model.Contrato;
-import br.com.mariolemos.gestao_escolar.model.Pessoa;
-import br.com.mariolemos.gestao_escolar.model.Responsavel;
+import br.com.mariolemos.gestao_escolar.model.*;
 import br.com.mariolemos.gestao_escolar.model.dto.PessoaDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,17 +17,21 @@ public class ResponsavelResponse extends PessoaDto {
 
     private Long id;
     private String parentesco;
-    private List<Contrato> contratos = new ArrayList<>();
-    private List<Aluno> alunos = new ArrayList<>();
+    private List<ContatoResponse> contatos = new ArrayList<>();
+    //private List<Aluno> alunos = new ArrayList<>();
+    private EnderecoResponse endereco;
 
     public ResponsavelResponse(Responsavel responsavel) {
         this.id = responsavel.getId();
         this.parentesco = responsavel.getParentesco();
+        this.contatos = ContatoResponse.of(responsavel.getContatos());
+        this.endereco = EnderecoResponse.of(responsavel.getEndereco());
 
         super.setNome(responsavel.getNome());
         super.setRg(responsavel.getRg());
         super.setCpf(responsavel.getCpf());
         super.setDataNascimento(responsavel.getDataNascimento());
+
     }
 
 //    public ResponsavelResponse of(Responsavel responsavel) {

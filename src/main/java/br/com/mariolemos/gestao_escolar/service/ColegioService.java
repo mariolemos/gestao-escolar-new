@@ -31,7 +31,7 @@ public class ColegioService {
         colegio1.setNome(colegio.getNome());
         colegio1.setHorario(colegio.getHorario());
 //        contatoService.excluirContatosColegio(id);
-//        colegio1.setContatos(colegio.getContatos());
+        colegio1.setContatos(colegio.getContatos());
 
         return colegioRepository.save(colegio1);
     }

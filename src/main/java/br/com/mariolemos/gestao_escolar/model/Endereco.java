@@ -37,4 +37,7 @@ public class Endereco {
     @OneToOne
     @JoinColumn(name = "COLEGIO_ID")
     private Colegio colegio;
+    @OneToOne
+    @JoinColumn(name = "PESSOA_ID")
+    private Pessoa pessoa;
 }

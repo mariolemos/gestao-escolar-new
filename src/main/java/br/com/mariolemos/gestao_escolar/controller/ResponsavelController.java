@@ -23,9 +23,20 @@ public class ResponsavelController {
         return ResponseEntity.ok().body(ResponsavelResponse.of(responsaveis));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ResponsavelResponse> buscarPorId(@PathVariable Long id) {
+        Responsavel responsavel = responsavelService.buscarPorId(id);
+        return ResponseEntity.ok().body(new ResponsavelResponse(responsavel));
+    }
+
     @PostMapping
     public ResponseEntity<ResponsavelResponse> incluir (@RequestBody ResponsavelRequest responsavelRequest) {
         Responsavel responsavel = responsavelService.incluir(ResponsavelRequest.of(responsavelRequest));
+        return ResponseEntity.ok().body(new ResponsavelResponse(responsavel));
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<ResponsavelResponse> atualizar (@RequestBody ResponsavelRequest responsavelRequest, @PathVariable("id") Long id) {
+        Responsavel responsavel = responsavelService.alterar(ResponsavelRequest.of(responsavelRequest), id);
         return ResponseEntity.ok().body(new ResponsavelResponse(responsavel));
     }
 

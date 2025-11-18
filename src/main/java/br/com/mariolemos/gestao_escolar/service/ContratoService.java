@@ -10,16 +10,16 @@ import java.util.List;
 @Service
 public class ContratoService {
 
-    @Autowired
-    private ContratoRepository contratoRepository;
-
-    public List<Contrato> buscar(){
-        List<Contrato> contratos = contratoRepository.findAll();
-        return contratos;
-    }
-
-    public Contrato incluir(Contrato contrato) {
-        contrato.calcularMensalidade();
-        return contratoRepository.save(contrato);
-    }
+//    @Autowired
+//    private ContratoRepository contratoRepository;
+//
+//    public List<Contrato> buscar(){
+//        List<Contrato> contratos = contratoRepository.findAll();
+//        return contratos;
+//    }
+//
+//    public Contrato incluir(Contrato contrato) {
+//        contrato.calcularMensalidade();
+//        return contratoRepository.save(contrato);
+//    }
 }

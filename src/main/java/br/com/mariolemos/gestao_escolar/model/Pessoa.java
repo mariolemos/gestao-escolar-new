@@ -9,9 +9,15 @@ import java.util.List;
 
 @Getter
 @Setter
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Pessoa {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
+    @Column(name = "ID")
+    private Long id;
     @Column(name = "NOME")
     private String nome;
     @Column(name = "DATA_NASCIMENTO")
@@ -20,11 +26,15 @@ public abstract class Pessoa {
     private String cpf;
     @Column(name = "RG")
     private String rg;
-    @JoinColumn(name = "ENDERECO_ID")
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa")
     private Endereco endereco;
-    @OneToMany(cascade = CascadeType.ALL)
-    @Column(name = "PESSOA_ID")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoa" , orphanRemoval = true)
     private List<Contato> contatos = new ArrayList<Contato>();
+
+    @PrePersist
+    private  void prePesist() {
+        this.contatos.forEach(contato -> contato.setPessoa(this));
+        this.endereco.setPessoa(this);
+    }
 
 }
