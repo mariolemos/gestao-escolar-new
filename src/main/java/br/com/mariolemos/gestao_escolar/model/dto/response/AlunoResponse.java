@@ -20,6 +20,7 @@ public class AlunoResponse extends PessoaDto {
     private String nomeMae;
     private String convenioMedico;
     private Boolean ativo;
+    private EnderecoResponse endereco;
 
     public AlunoResponse(Aluno aluno) {
 
@@ -36,6 +37,8 @@ public class AlunoResponse extends PessoaDto {
         this.nomeMae = aluno.getNomeMae();
         this.convenioMedico = aluno.getConvenioMedico();
         this.ativo = aluno.getAtivo();
+        this.endereco = EnderecoResponse.of(aluno.getEndereco());
+
     }
 
     public static List<AlunoResponse> of(List<Aluno> alunos) {

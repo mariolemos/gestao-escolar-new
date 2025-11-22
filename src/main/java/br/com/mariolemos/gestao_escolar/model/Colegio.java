@@ -23,8 +23,7 @@ public class Colegio {
     private String nome;
     @Column(name = "HORARIO")
     private String horario;
-    //@OneToMany(mappedBy = "colegio", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "COLEGIO_ID")
     private List<Contato> contatos = new ArrayList<Contato>();
     @OneToOne(mappedBy = "colegio", cascade = CascadeType.ALL)

@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ColegioRequest {
 
-    //@Max(30)
+    private Long id;
     @NotBlank(message = "Nome é obrigatório")
     private String nome;
     @NotBlank(message = "O horário não pode estar vazio")
@@ -32,6 +32,7 @@ public class ColegioRequest {
 
     public static Colegio of(ColegioRequest colegioRequest){
         Colegio colegio = new Colegio();
+
         colegio.setNome(colegioRequest.getNome());
         colegio.setHorario(colegioRequest.getHorario());
         colegio.setEndereco(EnderecoRequest.of(colegioRequest.getEndereco()));

@@ -28,13 +28,17 @@ public abstract class Pessoa {
     private String rg;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pessoa")
     private Endereco endereco;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoa" , orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoa")
     private List<Contato> contatos = new ArrayList<Contato>();
 
     @PrePersist
+    @PreUpdate
     private  void prePesist() {
         this.contatos.forEach(contato -> contato.setPessoa(this));
-        this.endereco.setPessoa(this);
+        if(endereco != null) {
+            this.endereco.setPessoa(this);
+        }
+
     }
 
 }

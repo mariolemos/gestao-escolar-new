@@ -2,6 +2,7 @@ package br.com.mariolemos.gestao_escolar.model.dto.request;
 
 import br.com.mariolemos.gestao_escolar.model.Aluno;
 import br.com.mariolemos.gestao_escolar.model.Colegio;
+import br.com.mariolemos.gestao_escolar.model.Endereco;
 import br.com.mariolemos.gestao_escolar.model.Responsavel;
 import br.com.mariolemos.gestao_escolar.model.dto.PessoaDto;
 import jakarta.validation.constraints.NotNull;
@@ -29,6 +30,8 @@ public class AlunoRequest extends PessoaDto {
     private Long colegioId;
     @NotNull
     private Long responsavelId;
+    private EnderecoRequest endereco;
+    @NotNull
     private List<ContatoRequest> contatos = new ArrayList<ContatoRequest>();
 
     public static Aluno Of(AlunoRequest alunoRequest) {
@@ -38,13 +41,15 @@ public class AlunoRequest extends PessoaDto {
         Responsavel responsavel = new Responsavel();
         responsavel.setId(alunoRequest.getResponsavelId());
 
+
         Colegio colegio = new Colegio();
         colegio.setId(alunoRequest.getColegioId());
+
 
        aluno.setNome(alunoRequest.getNome());
        aluno.setCpf(alunoRequest.getCpf());
        aluno.setRg(alunoRequest.getRg());
-      // aluno.setDataNascimento(alunoRequest.getDataNascimento());
+       aluno.setDataNascimento(alunoRequest.getDataNascimento());
        aluno.setTurno(alunoRequest.getTurno());
        aluno.setSerie(alunoRequest.getSerie());
        aluno.setTurma(alunoRequest.getTurma());
@@ -54,6 +59,7 @@ public class AlunoRequest extends PessoaDto {
        aluno.setConvenioMedico(alunoRequest.getConvenioMedico());
        aluno.setColegio(colegio);
        aluno.setResponsavel(responsavel);
+       aluno.setEndereco(EnderecoRequest.of(alunoRequest.getEndereco()));
 
        return aluno;
     }

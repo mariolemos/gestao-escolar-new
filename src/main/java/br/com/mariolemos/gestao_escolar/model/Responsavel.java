@@ -21,10 +21,13 @@ public class Responsavel extends Pessoa{
     private Long id;
     @Column(name = "PARENTESCO")
     private String parentesco;
-    //private List<Contrato> contratos = new ArrayList<>();
     @OneToMany
     @JoinColumn(name = "RESPONSAVEL_ID")
     private List<Aluno> alunos = new ArrayList<>();
+
+    private void prePesist(){
+        this.getEndereco().setPessoa(this);
+    }
 
 }
 

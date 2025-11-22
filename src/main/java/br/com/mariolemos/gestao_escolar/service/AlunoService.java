@@ -20,7 +20,7 @@ public class AlunoService {
     }
 
     public Aluno buscarPorId(Long id){
-        Aluno aluno = buscarPorId(id);
+        Aluno aluno = alunoRepository.findById(id).get();
         return aluno;
     }
 

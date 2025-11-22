@@ -28,7 +28,6 @@ public class ResponsavelRequest extends PessoaDto {
 
         Responsavel responsavel = new Responsavel();
 
-        responsavel.setId(responsavelRequest.getId());
         responsavel.setNome(responsavelRequest.getNome());
         responsavel.setCpf(responsavelRequest.getCpf());
         responsavel.setRg(responsavelRequest.getRg());
