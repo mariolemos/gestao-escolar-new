@@ -32,7 +32,10 @@ public class EnderecoRequest {
     public static Endereco of(EnderecoRequest enderecoRequest){
         Endereco endereco = new Endereco();
 
-        endereco.setId(enderecoRequest.getId());
+        if(enderecoRequest.getId() != null && enderecoRequest.getId() > 0 ){
+            endereco.setId(enderecoRequest.getId());
+        }
+
         endereco.setLogradouro(enderecoRequest.getLogradouro());
         endereco.setNumero(enderecoRequest.getNumero());
         endereco.setComplemento(enderecoRequest.getComplemento());

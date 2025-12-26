@@ -32,8 +32,12 @@ public class Colegio {
     @JoinColumn(name = "COLEGIO_ID")
     private List<Aluno> alunos = new ArrayList<>();
     @PrePersist
+    @PreUpdate
     private void prePersist(){
-        this.endereco.setColegio(this);
+
+        if(endereco != null) {
+            this.endereco.setColegio(this);
+        }
         this.contatos.forEach(contato -> contato.setColegio(this));
     }
 

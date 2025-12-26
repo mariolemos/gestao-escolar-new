@@ -21,6 +21,8 @@ public class AlunoResponse extends PessoaDto {
     private String convenioMedico;
     private Boolean ativo;
     private EnderecoResponse endereco;
+    private Long colegioId;
+    private Long responsavelId;
 
     public AlunoResponse(Aluno aluno) {
 
@@ -38,6 +40,8 @@ public class AlunoResponse extends PessoaDto {
         this.convenioMedico = aluno.getConvenioMedico();
         this.ativo = aluno.getAtivo();
         this.endereco = EnderecoResponse.of(aluno.getEndereco());
+        this.colegioId = aluno.getColegio().getId();
+        this.responsavelId = aluno.getResponsavel().getId();
 
     }
 
