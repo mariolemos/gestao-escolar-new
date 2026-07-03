@@ -38,22 +38,19 @@ public class ResponsavelService {
         responsavel1.setRg(responsavel.getRg());
         responsavel1.setParentesco(responsavel.getParentesco());
         responsavel1.setContatos(responsavel.getContatos());
-        responsavel1.setEndereco(new Endereco());
 
-        if (responsavel.getEndereco().getId() != null) {
+        if (responsavel.getEndereco() != null) {
+            responsavel1.setEndereco(new Endereco());
             responsavel1.getEndereco().setId(responsavel.getEndereco().getId());
+            responsavel1.getEndereco().setLogradouro(responsavel.getEndereco().getLogradouro());
+            responsavel1.getEndereco().setBairro(responsavel.getEndereco().getBairro());
+            responsavel1.getEndereco().setCep(responsavel.getEndereco().getCep());
+            responsavel1.getEndereco().setComplemento(responsavel.getEndereco().getComplemento());
+            responsavel1.getEndereco().setEstado(responsavel.getEndereco().getEstado());
+            responsavel1.getEndereco().setCidade(responsavel.getEndereco().getCidade());
+            responsavel1.getEndereco().setNumero(responsavel.getEndereco().getNumero());
         }
-
-        responsavel1.getEndereco().setLogradouro(responsavel.getEndereco().getLogradouro());
-        responsavel1.getEndereco().setBairro(responsavel.getEndereco().getBairro());
-        responsavel1.getEndereco().setCep(responsavel.getEndereco().getCep());
-        responsavel1.getEndereco().setComplemento(responsavel.getEndereco().getComplemento());
-        responsavel1.getEndereco().setEstado(responsavel.getEndereco().getEstado());
-        responsavel1.getEndereco().setCidade(responsavel.getEndereco().getCidade());
-        responsavel1.getEndereco().setNumero(responsavel.getEndereco().getNumero());
-
         return responsavelRepository.save(responsavel1);
-
     }
 
 }

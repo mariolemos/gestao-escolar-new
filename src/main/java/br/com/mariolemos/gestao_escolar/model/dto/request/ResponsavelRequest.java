@@ -33,11 +33,13 @@ public class ResponsavelRequest extends PessoaDto {
         responsavel.setRg(responsavelRequest.getRg());
         responsavel.setParentesco(responsavelRequest.getParentesco());
         responsavel.setDataNascimento(responsavelRequest.getDataNascimento());
-        responsavel.setEndereco(EnderecoRequest.of(responsavelRequest.getEndereco()));
-        responsavel.setContatos(ContatoRequest.of(responsavelRequest.getContatos()));
-
+        if(responsavelRequest.endereco != null) {
+            responsavel.setEndereco(EnderecoRequest.of(responsavelRequest.getEndereco()));
+        }
+        if(!responsavelRequest.contatos.isEmpty()) {
+            responsavel.setContatos(ContatoRequest.of(responsavelRequest.getContatos()));
+        }
         return responsavel;
-
     }
 
 }

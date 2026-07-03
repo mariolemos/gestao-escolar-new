@@ -33,6 +33,14 @@ public class ApiExceptionHandler {
         erroResponse.setMensagem(ex.getMessage());
         return new ResponseEntity<>(erroResponse, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(RegraDeNegocioException.class)
+    public ResponseEntity<ErroResponse> handleException(RegraDeNegocioException ex) {
+
+        ErroResponse erroResponse = new ErroResponse();
+        erroResponse.setStatus(HttpStatus.BAD_REQUEST.value());
+        erroResponse.setMensagem(ex.getMessage());
+        return new ResponseEntity<>(erroResponse, HttpStatus.BAD_REQUEST);
+    }
 }
 
 
