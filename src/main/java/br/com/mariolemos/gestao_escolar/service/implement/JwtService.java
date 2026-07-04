@@ -1,0 +1,53 @@
+package br.com.mariolemos.gestao_escolar.service.implement;
+
+import br.com.mariolemos.gestao_escolar.model.User;
+import br.com.mariolemos.gestao_escolar.service.IJwtService;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+
+@Service
+public class JwtService implements IJwtService {
+
+    @Value("${security.jwt.secret}")
+    private String SECRET = "";
+
+    private Key getKey() {
+        return Keys.hmacShaKeyFor(
+                SECRET.getBytes(StandardCharsets.UTF_8)
+        );
+    }
+
+    public String generateToken(User user) {
+
+        return Jwts.builder()
+                .subject(user.getCpf())
+                .issuedAt(new Date())
+                .expiration(
+                        Date.from(
+                                Instant.now()
+                                        .plus(1, ChronoUnit.DAYS)
+                        )
+                )
+                .signWith(getKey())
+                .compact();
+    }
+
+    public String extractUsername(String token) {
+
+        return Jwts.parser()
+                .verifyWith((SecretKey) getKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .getSubject();
+    }
+}
