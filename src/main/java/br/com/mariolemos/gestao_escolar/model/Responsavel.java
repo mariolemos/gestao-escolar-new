@@ -1,6 +1,5 @@
 package br.com.mariolemos.gestao_escolar.model;
 
-import br.com.mariolemos.gestao_escolar.model.dto.response.ResponsavelResponse;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,7 +16,7 @@ public class Responsavel extends Pessoa{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
     @Column(name = "PARENTESCO")
     private String parentesco;

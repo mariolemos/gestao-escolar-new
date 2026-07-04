@@ -1,6 +1,6 @@
 create table CONTRATO(
 
-    ID bigint not null primary key,
+    ID bigint GENERATED ALWAYS AS IDENTITY  not null primary key,
     VALOR_CONTRATUAL DECIMAL,
     DATA_PAGAMENTO DATE,
     FORMA_PAGAMENTO varchar(20),

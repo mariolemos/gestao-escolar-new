@@ -1,5 +1,5 @@
 create table CONTATO(
-    ID bigint not null primary key,
+    ID bigint GENERATED ALWAYS AS IDENTITY  not null primary key,
         TIPO_CONTATO VARCHAR(10) not null,
         CONTATO VARCHAR(100) not null,
         COLEGIO_ID bigint,
