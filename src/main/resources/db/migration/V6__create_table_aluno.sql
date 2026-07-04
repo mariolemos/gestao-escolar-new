@@ -1,6 +1,6 @@
-create table `ALUNO`(
+create table ALUNO(
 
-    ID bigint not null auto_increment primary key,
+    ID bigint not null primary key,
 
     TURNO varchar(30),
     SERIE VARCHAR(30),

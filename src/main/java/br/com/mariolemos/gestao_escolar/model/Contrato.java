@@ -49,7 +49,7 @@ public class Contrato {
     @ManyToOne()
     @JoinColumn(name = "RESPONSAVEL_Id")
     private Responsavel responsavel;
-    @OneToMany
+    @OneToMany(mappedBy = "contrato")
     private List<Aluno> alunos = new ArrayList<>();
 
     public void calcularMensalidade() {

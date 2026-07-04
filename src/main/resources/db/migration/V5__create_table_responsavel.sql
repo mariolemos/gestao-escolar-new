@@ -1,5 +1,5 @@
-create table `RESPONSAVEL`(
-    ID bigint not null auto_increment primary key,
+create table RESPONSAVEL(
+    ID bigint not null primary key,
         PARENTESCO VARCHAR(50)
 );
 

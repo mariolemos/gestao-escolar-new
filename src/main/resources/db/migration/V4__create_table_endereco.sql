@@ -1,5 +1,5 @@
-create table `ENDERECO` (
-    ID bigint not null auto_increment primary key,
+create table ENDERECO (
+    ID bigint not null primary key,
     LOGRADOURO VARCHAR(150) not null,
     NUMERO VARCHAR(15),
     COMPLEMENTO VARCHAR(100),

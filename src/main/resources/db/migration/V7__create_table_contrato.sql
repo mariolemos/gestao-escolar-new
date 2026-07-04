@@ -1,6 +1,6 @@
-create table `CONTRATO`(
+create table CONTRATO(
 
-    ID bigint not null auto_increment primary key,
+    ID bigint not null primary key,
     VALOR_CONTRATUAL DECIMAL,
     DATA_PAGAMENTO DATE,
     FORMA_PAGAMENTO varchar(20),

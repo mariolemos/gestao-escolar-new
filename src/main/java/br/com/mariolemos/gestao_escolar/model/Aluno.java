@@ -35,7 +35,7 @@ public class Aluno extends Pessoa{
     private String convenioMedico;
     @Column(name = "ATIVO")
     private Boolean ativo;
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CONTRATO_ID")
     private Contrato contrato;
     @ManyToOne
