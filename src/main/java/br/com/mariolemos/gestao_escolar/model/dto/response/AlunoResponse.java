@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +24,7 @@ public class AlunoResponse extends PessoaDto {
     private EnderecoResponse endereco;
     private Long colegioId;
     private Long responsavelId;
+    private List<ContatoResponse> contatos = new ArrayList<>();
 
     public AlunoResponse(Aluno aluno) {
 
@@ -42,6 +44,8 @@ public class AlunoResponse extends PessoaDto {
         this.endereco = EnderecoResponse.of(aluno.getEndereco());
         this.colegioId = aluno.getColegio().getId();
         this.responsavelId = aluno.getResponsavel().getId();
+        this.contatos = ContatoResponse.of(aluno.getContatos());
+
 
     }
 

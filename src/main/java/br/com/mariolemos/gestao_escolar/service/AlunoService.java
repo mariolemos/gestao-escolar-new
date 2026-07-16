@@ -44,6 +44,7 @@ public class AlunoService {
         alunoAtualizado.setConvenioMedico(aluno.getConvenioMedico());
         alunoAtualizado.setColegio(aluno.getColegio());
         alunoAtualizado.setResponsavel(aluno.getResponsavel());
+        alunoAtualizado.setEndereco(aluno.getEndereco());
 
         alunoRepository.save(alunoAtualizado);
 
