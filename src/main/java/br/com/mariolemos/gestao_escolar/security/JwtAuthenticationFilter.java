@@ -1,12 +1,19 @@
 package br.com.mariolemos.gestao_escolar.security;
 
-import br.com.mariolemos.gestao_escolar.service.IJwtService;
 import br.com.mariolemos.gestao_escolar.service.implement.CustomUserDetailsService;
+import br.com.mariolemos.gestao_escolar.service.implement.JwtService;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +26,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final IJwtService jwtService;
+    private final JwtService jwtService;
     private final CustomUserDetailsService userDetailsService;
 
     @Override
@@ -29,33 +36,78 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             FilterChain filterChain)
             throws ServletException, IOException {
 
-        String header =
-                request.getHeader("Authorization");
+        String header = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         if (header == null || !header.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        String token =
-                header.substring(7);
+        try {
 
-        String email =
-                jwtService.extractUsername(token);
+            String token = header.substring(7);
 
-        UserDetails user =
-                userDetailsService.loadUserByUsername(email);
+            String email = jwtService.extractUsername(token);
 
-        UsernamePasswordAuthenticationToken auth =
-                new UsernamePasswordAuthenticationToken(
-                        user,
-                        null,
-                        user.getAuthorities()
-                );
+            if (email != null &&
+                    SecurityContextHolder.getContext().getAuthentication() == null) {
 
-        SecurityContextHolder.getContext()
-                .setAuthentication(auth);
+                UserDetails user =
+                        userDetailsService.loadUserByUsername(email);
 
-        filterChain.doFilter(request, response);
+                if (jwtService.isTokenValid(token, user)) {
+
+                    UsernamePasswordAuthenticationToken authentication =
+                            new UsernamePasswordAuthenticationToken(
+                                    user,
+                                    null,
+                                    user.getAuthorities());
+
+                    SecurityContextHolder.getContext()
+                            .setAuthentication(authentication);
+                }
+            }
+
+            filterChain.doFilter(request, response);
+
+        } catch (ExpiredJwtException ex) {
+
+            unauthorized(response, request, "Token expirado.");
+
+        } catch (MalformedJwtException ex) {
+
+            unauthorized(response, request, "Token inválido.");
+
+        } catch (UnsupportedJwtException ex) {
+
+            unauthorized(response, request, "Token não suportado.");
+
+        } catch (SignatureException ex) {
+
+            unauthorized(response, request, "Assinatura do token inválida.");
+
+        } catch (JwtException ex) {
+
+            unauthorized(response, request, "Falha na autenticação.");
+        }
+    }
+
+    private void unauthorized(
+            HttpServletResponse response,
+            HttpServletRequest request,
+            String message) throws IOException {
+
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setCharacterEncoding("UTF-8");
+
+        response.getWriter().write("""
+            {
+                "status":401,
+                "error":"UNAUTHORIZED",
+                "message":"%s",
+                "path":"%s"
+            }
+            """.formatted(message, request.getRequestURI()));
     }
 }
