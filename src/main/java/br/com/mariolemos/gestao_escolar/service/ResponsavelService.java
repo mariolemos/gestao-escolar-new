@@ -31,7 +31,6 @@ public class ResponsavelService {
 
         Responsavel responsavel1 = buscarPorId(id);
 
-
         responsavel1.setNome(responsavel.getNome());
         responsavel1.setDataNascimento(responsavel.getDataNascimento());
         responsavel1.setCpf(responsavel.getCpf());
@@ -40,8 +39,8 @@ public class ResponsavelService {
         responsavel1.setContatos(responsavel.getContatos());
 
         if (responsavel.getEndereco() != null) {
-            responsavel1.setEndereco(new Endereco());
-            responsavel1.getEndereco().setId(responsavel.getEndereco().getId());
+//            responsavel1.setEndereco(new Endereco());
+//            responsavel1.getEndereco().setId(responsavel.getEndereco().getId());
             responsavel1.getEndereco().setLogradouro(responsavel.getEndereco().getLogradouro());
             responsavel1.getEndereco().setBairro(responsavel.getEndereco().getBairro());
             responsavel1.getEndereco().setCep(responsavel.getEndereco().getCep());
