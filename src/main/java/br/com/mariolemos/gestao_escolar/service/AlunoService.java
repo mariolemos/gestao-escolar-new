@@ -1,9 +1,11 @@
 package br.com.mariolemos.gestao_escolar.service;
 
 
+import br.com.mariolemos.gestao_escolar.exception.RegraDeNegocioException;
 import br.com.mariolemos.gestao_escolar.model.Aluno;
 import br.com.mariolemos.gestao_escolar.repository.AlunoRepository;
 import br.com.mariolemos.gestao_escolar.repository.ColegioRepository;
+import br.com.mariolemos.gestao_escolar.repository.ResponsavelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,9 @@ public class AlunoService {
     @Autowired
     private AlunoRepository alunoRepository;
 
+    @Autowired
+    private ResponsavelRepository responsavelRepository;
+
     public List<Aluno> buscar(){
         return alunoRepository.findAll();
     }
@@ -25,8 +30,11 @@ public class AlunoService {
     }
 
     public Aluno incluir(Aluno aluno){
-        alunoRepository.save(aluno);
-        return aluno;
+
+        if(alunoRepository.existsBycpf(aluno.getCpf())) {
+            throw new RegraDeNegocioException("Este CPF já está cadastrado");
+        }
+        return alunoRepository.save(aluno);
     }
 
     public Aluno atualizar(Aluno aluno, Long id){

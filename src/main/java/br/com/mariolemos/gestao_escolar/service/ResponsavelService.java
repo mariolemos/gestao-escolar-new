@@ -1,5 +1,6 @@
 package br.com.mariolemos.gestao_escolar.service;
 
+import br.com.mariolemos.gestao_escolar.exception.RegraDeNegocioException;
 import br.com.mariolemos.gestao_escolar.model.Endereco;
 import br.com.mariolemos.gestao_escolar.model.Responsavel;
 import br.com.mariolemos.gestao_escolar.repository.ResponsavelRepository;
@@ -14,6 +15,9 @@ public class ResponsavelService {
     @Autowired
     private ResponsavelRepository responsavelRepository;
 
+    @Autowired
+    private ContatoService contatoService;
+
     public List<Responsavel> buscar() {
         return responsavelRepository.findAll();
     }
@@ -23,7 +27,9 @@ public class ResponsavelService {
     }
 
     public Responsavel incluir(Responsavel responsavel) {
-
+        if(responsavelRepository.existsBycpf(responsavel.getCpf())) {
+            throw new RegraDeNegocioException("Este CPF já está cadastrado");
+        }
         return responsavelRepository.save(responsavel);
     }
 
@@ -36,6 +42,8 @@ public class ResponsavelService {
         responsavel1.setCpf(responsavel.getCpf());
         responsavel1.setRg(responsavel.getRg());
         responsavel1.setParentesco(responsavel.getParentesco());
+
+        contatoService.deleteAll(responsavel1.getContatos());
         responsavel1.setContatos(responsavel.getContatos());
 
         if (responsavel.getEndereco() != null) {
@@ -52,4 +60,12 @@ public class ResponsavelService {
         return responsavelRepository.save(responsavel1);
     }
 
+    public Responsavel buscarCpf(String cpf) {
+       if(responsavelRepository.existsBycpf(cpf)) {
+//           Responsavel responsavel = new Responsavel();
+//           responsavel.setCpf(responsavel.getCpf(cpf));
+           return buscarCpf(cpf);
+       }
+       return null;
+    }
 }
