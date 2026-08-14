@@ -29,6 +29,12 @@ public class ResponsavelController {
         return ResponseEntity.ok().body(new ResponsavelResponse(responsavel));
     }
 
+    @GetMapping("/consultarCpf/{cpf}")
+    public ResponseEntity<ResponsavelResponse> consultarCpf(@PathVariable String cpf) {
+        Responsavel responsavel = responsavelService.buscarCpf(cpf);
+        return ResponseEntity.ok().body(new ResponsavelResponse(responsavel));
+    }
+
     @PostMapping
     public ResponseEntity<ResponsavelResponse> incluir (@RequestBody ResponsavelRequest responsavelRequest) {
         Responsavel responsavel = responsavelService.incluir(ResponsavelRequest.of(responsavelRequest));

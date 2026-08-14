@@ -1,6 +1,7 @@
 package br.com.mariolemos.gestao_escolar.service;
 
 import br.com.mariolemos.gestao_escolar.model.Colegio;
+import br.com.mariolemos.gestao_escolar.model.Endereco;
 import br.com.mariolemos.gestao_escolar.repository.ColegioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,18 @@ public class ColegioService {
         colegio1.setHorario(colegio.getHorario());
 //        contatoService.excluirContatosColegio(id);
         colegio1.setContatos(colegio.getContatos());
+
+        if(colegio.getEndereco() != null) {
+//
+            colegio1.getEndereco().setCep(colegio.getEndereco().getCep());
+            colegio1.getEndereco().setNumero(colegio.getEndereco().getNumero());
+            colegio1.getEndereco().setComplemento(colegio.getEndereco().getComplemento());
+            colegio1.getEndereco().setLogradouro(colegio.getEndereco().getLogradouro());
+            colegio1.getEndereco().setBairro(colegio.getEndereco().getBairro());
+            colegio1.getEndereco().setCidade(colegio.getEndereco().getCidade());
+            colegio1.getEndereco().setEstado(colegio.getEndereco().getEstado());
+        }
+
 
         return colegioRepository.save(colegio1);
     }

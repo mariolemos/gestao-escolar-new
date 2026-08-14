@@ -19,4 +19,8 @@ public class ContatoService {
     public List<Contato> buscar(){
         return contatoRepository.findAll();
     }
+
+    public void deleteAll(List<Contato> contatos) {
+        contatoRepository.deleteAll(contatos);
+    }
 }
