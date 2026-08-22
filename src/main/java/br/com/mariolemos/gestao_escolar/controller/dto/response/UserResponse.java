@@ -18,19 +18,24 @@ import java.util.UUID;
 public class UserResponse implements IResponse<User, UserResponse> {
 
     private UUID id;
-
     private String cpf;
-
     @JsonIgnore
     private String password;
-
     private String name;
-
     private Boolean active;
+    private ProfileResponse profile;
 
     @Override
     public UserResponse to(User user) {
-        return UserResponse.builder().id(user.getId()).cpf(user.getCpf()).name(user.getName()).active(user.getActive()).password(user.getPassword()).build();
+        ProfileResponse profile =  user.getProfile() != null ? new ProfileResponse(user.getProfile()) : new ProfileResponse();
+        return UserResponse.builder()
+                .id(user.getId())
+                .cpf(user.getCpf())
+                .name(user.getName())
+                .active(user.getActive())
+                .password(user.getPassword())
+                .profile(profile)
+                .build();
     }
 
     @Override

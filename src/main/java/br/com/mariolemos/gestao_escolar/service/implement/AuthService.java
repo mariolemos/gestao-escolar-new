@@ -9,8 +9,12 @@ import com.digidata.escolar_geolocation.controller.dto.response.LoginResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -22,24 +26,28 @@ public class AuthService implements IAuthService {
 
     public LoginResponse login(LoginRequest request) {
 
-        try{
-            authenticationManager.authenticate(
+        Authentication authentication;
+
+        try {
+            authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             request.cpf(),
                             request.password()
                     )
             );
-        } catch (BadCredentialsException e) {
+        } catch (BadCredentialsException | InternalAuthenticationServiceException e) {
             throw new UnauthorizedException("Usuário ou senha inválidos");
         }
-        catch (Exception e){
-            System.out.println("Erro ao fazer login");
-        }
-        User user = repository.findByCpf(request.cpf())
-                .orElseThrow();
+
+        User user = (User) authentication.getPrincipal();
 
         String token = jwtService.generateToken(user);
 
-        return new LoginResponse(token, "",user.getName(), user.getCpf());
+        return new LoginResponse(
+                token,
+                "",
+                user.getName(),
+                user.getCpf()
+        );
     }
 }

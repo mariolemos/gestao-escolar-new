@@ -1,7 +1,6 @@
 package br.com.mariolemos.gestao_escolar.service.implement;
 
 import br.com.digidata.crud.service.CrudService;
-import br.com.mariolemos.gestao_escolar.enumerations.Role;
 import br.com.mariolemos.gestao_escolar.model.User;
 import br.com.mariolemos.gestao_escolar.repository.UserRepository;
 import br.com.mariolemos.gestao_escolar.service.IUserService;
@@ -41,9 +40,12 @@ public class UserService extends CrudService<User, UUID> implements IUserService
                 .cpf(user.getCpf())
                 .name(user.getName())
                 .password(passwordEncoder.encode(user.getPassword()))
-                .role(Role.ADMIN)
                 .build();
         return userRepository.save(user);
     }
 
+    @Override
+    public boolean hasPermission(String username, String resource, String permission) {
+        return userRepository.hasPermission(username, resource, permission);
+    }
 }

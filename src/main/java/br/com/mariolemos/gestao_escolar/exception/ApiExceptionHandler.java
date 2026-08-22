@@ -4,6 +4,7 @@ import br.com.digidata.crud.exception.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -120,6 +121,30 @@ public class ApiExceptionHandler {
 
     }
 
+    @ExceptionHandler(AuthorizationDeniedException.class)
+    public ResponseEntity<ErrorResponse> handleDeniedException(
+            Exception ex,
+            HttpServletRequest request
+    ){
+
+
+        ErrorResponse response =
+                new ErrorResponse(
+                        LocalDateTime.now(),
+                        HttpStatus.FORBIDDEN.value(),
+                        HttpStatus.FORBIDDEN.name(),
+                        "Usuário não tem permissão para acessar essa funcinalidade.",
+                        request.getRequestURI(),
+                        Arrays.asList(ex.getMessage())
+                );
+
+
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .body(response);
+
+    }
+
 
 
 
@@ -146,7 +171,6 @@ public class ApiExceptionHandler {
                 .body(response);
 
     }
-
 }
 
 

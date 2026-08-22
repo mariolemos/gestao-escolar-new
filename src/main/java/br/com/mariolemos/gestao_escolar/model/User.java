@@ -1,12 +1,12 @@
 package br.com.mariolemos.gestao_escolar.model;
 
-import br.com.mariolemos.gestao_escolar.enumerations.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -24,23 +24,57 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(nullable = false)
     private String name;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String cpf;
 
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    @Builder.Default
     private Boolean active = Boolean.TRUE;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(
-                new SimpleGrantedAuthority("ROLE_" + role.name())
+
+        List<GrantedAuthority> authorities = new ArrayList<>();
+
+        if (profile == null) {
+            return authorities;
+        }
+
+        // ROLE_GESTOR, ROLE_ADMINISTRADOR, etc.
+        authorities.add(
+                new SimpleGrantedAuthority(
+                        "ROLE_" + profile.getKey()
+                )
         );
+
+        // Permissões dos recursos
+        profile.getProfileResources().forEach(profileResource -> {
+
+            String resource = profileResource
+                    .getResource()
+                    .getKey();
+
+            profileResource.getPermissions().forEach(permission -> {
+
+                authorities.add(
+                        new SimpleGrantedAuthority(
+                                resource + ":" + permission.getKey()
+                        )
+                );
+            });
+        });
+
+        return authorities;
     }
 
     @Override
@@ -65,6 +99,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return active;
+        return Boolean.TRUE.equals(active);
     }
 }
