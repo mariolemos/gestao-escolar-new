@@ -1,10 +1,8 @@
 package br.com.mariolemos.gestao_escolar.controller;
 
-import br.com.digidata.crud.controller.CrudController;
 import br.com.digidata.crud.controller.dto.request.IRequest;
 import br.com.digidata.crud.controller.dto.response.IResponse;
 import br.com.mariolemos.gestao_escolar.security.permission.ResourcePermission;
-import br.com.mariolemos.gestao_escolar.controller.IControle.IUsuarioController;
 import br.com.mariolemos.gestao_escolar.controller.dto.request.UserRequest;
 import br.com.mariolemos.gestao_escolar.controller.dto.response.UserResponse;
 import br.com.mariolemos.gestao_escolar.model.User;
@@ -14,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user")
-//@ResourcePermission("USUARIO")
-public class UserController extends CrudController<UserRequest, UserResponse, User> implements IUsuarioController<UserRequest,UserResponse> {
+@ResourcePermission("USUARIO")
+public class UserController extends BaseCrudController<UserRequest, UserResponse, User>{
 
     public UserController(IUserService<User> service, IRequest<UserRequest, User> request, IResponse<User, UserResponse> response) {
         super(service, request, response);
