@@ -4,43 +4,42 @@ import br.com.digidata.crud.service.CrudService;
 import br.com.mariolemos.gestao_escolar.model.Permission;
 import br.com.mariolemos.gestao_escolar.repository.PermissionRepository;
 import br.com.mariolemos.gestao_escolar.service.IPermissionService;
-import br.com.mariolemos.gestao_escolar.service.IUserService;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @Service
-public class PermissionService extends CrudService<Permission, UUID>
-        implements IPermissionService<Permission> {
+public class PermissionService extends CrudService<Permission, UUID> implements IPermissionService<Permission> {
 
-    private final PermissionRepository repository;
-    private final UserService usuarioService;
+    private PermissionRepository repository;
 
-    public PermissionService(PermissionRepository repository,UserService usuarioService) {
+    public PermissionService(PermissionRepository repository) {
         super(repository);
         this.repository = repository;
-        this.usuarioService = usuarioService;
     }
 
-    @Override
-    public boolean hasPermission(String resource, String permission) {
-
-        Authentication authentication =
-                SecurityContextHolder.getContext().getAuthentication();
+    public boolean hasPermission(
+            Authentication authentication,
+            String resource,
+            String permission) {
 
         if (authentication == null ||
                 !authentication.isAuthenticated()) {
+
             return false;
         }
 
-        String username = authentication.getName();
+        String requiredAuthority =
+                resource + ":" + permission;
 
-        return usuarioService.hasPermission(
-                username,
-                resource,
-                permission
-        );
+        return authentication
+                .getAuthorities()
+                .stream()
+                .anyMatch(authority ->
+                        authority
+                                .getAuthority()
+                                .equals(requiredAuthority)
+                );
     }
 }

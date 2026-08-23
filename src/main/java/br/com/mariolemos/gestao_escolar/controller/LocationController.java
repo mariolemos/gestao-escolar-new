@@ -5,6 +5,7 @@ import br.com.mariolemos.gestao_escolar.controller.dto.response.LocationResponse
 import br.com.mariolemos.gestao_escolar.model.Location;
 import br.com.mariolemos.gestao_escolar.service.ILocationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -18,6 +19,7 @@ public class LocationController{
     private final LocationRequest locationRequest = new LocationRequest();
     private final LocationResponse locationResponse = new LocationResponse();
 
+    @PreAuthorize("hasAuthority('LOCATION:VIEW')")
     @GetMapping("/{vehicleId}")
     public LocationResponse getLocation(@PathVariable UUID vehicleId){
         return locationResponse.to(service.findByLocation(vehicleId));

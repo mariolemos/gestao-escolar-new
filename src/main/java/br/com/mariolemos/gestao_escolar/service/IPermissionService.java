@@ -1,6 +1,7 @@
 package br.com.mariolemos.gestao_escolar.service;
 
 import br.com.digidata.crud.service.ICrudService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -9,6 +10,7 @@ import java.util.UUID;
 public interface IPermissionService<T> extends ICrudService<T, UUID> {
 
     boolean hasPermission(
+            Authentication authentication,
             String resource,
             String permission
     );
