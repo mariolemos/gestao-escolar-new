@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("resource")
-@ResourcePermission("RESOURCE")
+@ResourcePermission("RECURSO")
 public class ResourceController
         extends BaseCrudController<ResourceRequest, ResourceResponse, Resource> {
 

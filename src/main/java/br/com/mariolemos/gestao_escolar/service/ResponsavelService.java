@@ -1,29 +1,52 @@
 package br.com.mariolemos.gestao_escolar.service;
 
+import br.com.mariolemos.gestao_escolar.configuration.UsuarioLogado;
+import br.com.mariolemos.gestao_escolar.exception.BusinessException;
 import br.com.mariolemos.gestao_escolar.exception.RegraDeNegocioException;
-import br.com.mariolemos.gestao_escolar.model.Endereco;
 import br.com.mariolemos.gestao_escolar.model.Responsavel;
 import br.com.mariolemos.gestao_escolar.repository.ResponsavelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import static br.com.mariolemos.gestao_escolar.constrants.Constrants.MSG_USUARIO_SEM_PERMISSAO;
+import static br.com.mariolemos.gestao_escolar.constrants.Constrants.PERFIL_RESPONSAVEL;
 
 @Service
 public class ResponsavelService {
 
     @Autowired
     private ResponsavelRepository responsavelRepository;
-
     @Autowired
     private ContatoService contatoService;
+    @Autowired
+    private UsuarioLogado usuarioLogado;
 
     public List<Responsavel> buscar() {
+        if(usuarioLogado.getPerfil().equalsIgnoreCase(PERFIL_RESPONSAVEL)){
+            try{
+                return Collections.singletonList(buscarPorCpf(usuarioLogado.getUserName()));
+            } catch (BusinessException e) {
+                return new ArrayList<>();
+            }
+        }
+
         return responsavelRepository.findAll();
     }
 
     public Responsavel buscarPorId(Long id) {
-        return responsavelRepository.findById(id).orElseThrow(() -> new RuntimeException("Recurso não encontrado"));
+        Responsavel responsavel = responsavelRepository.findById(id).orElseThrow(() -> new BusinessException("Recurso não encontrado"));
+        if(!responsavel.getId().equals(buscarPorCpf(usuarioLogado.getUserName()).getId())){
+            throw new BusinessException(MSG_USUARIO_SEM_PERMISSAO);
+        }
+        return responsavel;
+    }
+
+    public Responsavel buscarPorCpf(String cpf) {
+        return responsavelRepository.findBycpf(cpf).orElseThrow(() -> new BusinessException("Recurso não encontrado"));
     }
 
     public Responsavel incluir(Responsavel responsavel) {
@@ -36,6 +59,10 @@ public class ResponsavelService {
     public Responsavel alterar(Responsavel responsavel, Long id) {
 
         Responsavel responsavel1 = buscarPorId(id);
+
+        if(!responsavel.getId().equals(buscarPorCpf(usuarioLogado.getUserName()).getId())){
+            throw new BusinessException(MSG_USUARIO_SEM_PERMISSAO);
+        }
 
         responsavel1.setNome(responsavel.getNome());
         responsavel1.setDataNascimento(responsavel.getDataNascimento());

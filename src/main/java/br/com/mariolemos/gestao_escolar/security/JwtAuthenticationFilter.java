@@ -1,5 +1,7 @@
 package br.com.mariolemos.gestao_escolar.security;
 
+import br.com.mariolemos.gestao_escolar.configuration.UsuarioLogado;
+import br.com.mariolemos.gestao_escolar.model.User;
 import br.com.mariolemos.gestao_escolar.service.implement.CustomUserDetailsService;
 import br.com.mariolemos.gestao_escolar.service.implement.JwtService;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -28,6 +30,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final CustomUserDetailsService userDetailsService;
+    private final UsuarioLogado usuarioLogado;
 
     @Override
     protected void doFilterInternal(
@@ -52,8 +55,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             if (email != null &&
                     SecurityContextHolder.getContext().getAuthentication() == null) {
 
-                UserDetails user =
+                User user =
                         userDetailsService.loadUserByUsername(email);
+
+                usuarioLogado.setIdUsuario(user.getId());
+                usuarioLogado.setToken(token);
+                usuarioLogado.setName(user.getName());
+                usuarioLogado.setUserName(user.getUsername());
+                usuarioLogado.setPerfil(user.getProfile().getKey());
 
                 if (jwtService.isTokenValid(token, user)) {
 
@@ -69,6 +78,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
 
             filterChain.doFilter(request, response);
+
 
         } catch (ExpiredJwtException ex) {
 

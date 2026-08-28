@@ -1,4 +1,4 @@
-package com.digidata.escolar_geolocation.controller.dto.request;
+package br.com.mariolemos.gestao_escolar.controller.dto.request;
 
 public record LoginRequest(
         String cpf,

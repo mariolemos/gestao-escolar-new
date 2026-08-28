@@ -10,9 +10,11 @@ import br.com.mariolemos.gestao_escolar.service.IProfileService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("profile")
-@ResourcePermission("PROFILE")
+@ResourcePermission("PERFIL")
 public class ProfileController extends BaseCrudController<ProfileRequest, ProfileResponse, Profile> {
 
     private IProfileService<Profile> service;
@@ -21,4 +23,5 @@ public class ProfileController extends BaseCrudController<ProfileRequest, Profil
         super(service, request, response);
         this.service = service;
     }
+
 }

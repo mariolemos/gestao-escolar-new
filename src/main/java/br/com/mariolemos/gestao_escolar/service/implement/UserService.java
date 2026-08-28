@@ -36,10 +36,12 @@ public class UserService extends CrudService<User, UUID> implements IUserService
 
     @Override
     public User create(User user) {
+        String password = user.getPassword() != null ? passwordEncoder.encode(user.getPassword()) : passwordEncoder.encode(user.getCpf());
         user = User.builder()
                 .cpf(user.getCpf())
                 .name(user.getName())
-                .password(passwordEncoder.encode(user.getPassword()))
+                .password(password)
+                .profile(user.getProfile())
                 .build();
         return userRepository.save(user);
     }

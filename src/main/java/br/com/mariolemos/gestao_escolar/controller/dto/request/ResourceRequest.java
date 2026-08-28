@@ -16,7 +16,6 @@ public class ResourceRequest implements IRequest<ResourceRequest, Resource> {
 
     private UUID id;
     private String name;
-    private String key;
     private String description;
     private Boolean active;
 
@@ -26,7 +25,7 @@ public class ResourceRequest implements IRequest<ResourceRequest, Resource> {
         return Resource.builder()
                 .id(request.getId())
                 .name(request.getName())
-                .key(request.getKey())
+                .key(request.getName().toUpperCase())
                 .description(request.getDescription())
                 .active(request.getActive())
                 .build();

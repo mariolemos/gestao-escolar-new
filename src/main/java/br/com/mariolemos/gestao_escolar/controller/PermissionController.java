@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("permission")
-@ResourcePermission("PERMISSION")
+@ResourcePermission("PERMISSOES")
 public class PermissionController
         extends BaseCrudController<PermissionRequest, PermissionResponse, Permission> {
 

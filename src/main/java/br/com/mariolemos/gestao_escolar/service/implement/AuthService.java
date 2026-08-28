@@ -1,11 +1,11 @@
 package br.com.mariolemos.gestao_escolar.service.implement;
 
+import br.com.mariolemos.gestao_escolar.controller.dto.request.LoginRequest;
+import br.com.mariolemos.gestao_escolar.controller.dto.response.LoginResponse;
 import br.com.mariolemos.gestao_escolar.exception.UnauthorizedException;
 import br.com.mariolemos.gestao_escolar.model.User;
 import br.com.mariolemos.gestao_escolar.repository.UserRepository;
 import br.com.mariolemos.gestao_escolar.service.IAuthService;
-import com.digidata.escolar_geolocation.controller.dto.request.LoginRequest;
-import com.digidata.escolar_geolocation.controller.dto.response.LoginResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -14,7 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -43,11 +43,23 @@ public class AuthService implements IAuthService {
 
         String token = jwtService.generateToken(user);
 
+        Map<String, List<String>> resources = new HashMap<>();
+
+        user.getProfile().getProfileResources().forEach(profileResource -> {
+            String name = profileResource.getResource().getKey();
+            List<String> permissions = new ArrayList<>();
+            profileResource.getPermissions().forEach(permission -> {
+               permissions.add(permission.getKey());
+            });
+            resources.put(name, permissions);
+        });
+
         return new LoginResponse(
                 token,
                 "",
                 user.getName(),
-                user.getCpf()
+                user.getCpf(),
+                resources
         );
     }
 }

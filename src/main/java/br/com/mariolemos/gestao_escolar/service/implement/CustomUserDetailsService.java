@@ -1,5 +1,6 @@
 package br.com.mariolemos.gestao_escolar.service.implement;
 
+import br.com.mariolemos.gestao_escolar.model.User;
 import br.com.mariolemos.gestao_escolar.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +15,7 @@ public class CustomUserDetailsService
     private final UserRepository repository;
 
     @Override
-    public UserDetails loadUserByUsername(
+    public User loadUserByUsername(
             String cpf) {
 
         return repository.findByCpf(cpf)

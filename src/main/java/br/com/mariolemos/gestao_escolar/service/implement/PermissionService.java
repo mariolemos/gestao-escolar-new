@@ -4,6 +4,7 @@ import br.com.digidata.crud.service.CrudService;
 import br.com.mariolemos.gestao_escolar.model.Permission;
 import br.com.mariolemos.gestao_escolar.repository.PermissionRepository;
 import br.com.mariolemos.gestao_escolar.service.IPermissionService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 

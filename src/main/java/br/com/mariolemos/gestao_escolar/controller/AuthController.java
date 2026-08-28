@@ -1,8 +1,8 @@
 package br.com.mariolemos.gestao_escolar.controller;
 
+import br.com.mariolemos.gestao_escolar.controller.dto.request.LoginRequest;
+import br.com.mariolemos.gestao_escolar.controller.dto.response.LoginResponse;
 import br.com.mariolemos.gestao_escolar.service.IAuthService;
-import com.digidata.escolar_geolocation.controller.dto.request.LoginRequest;
-import com.digidata.escolar_geolocation.controller.dto.response.LoginResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

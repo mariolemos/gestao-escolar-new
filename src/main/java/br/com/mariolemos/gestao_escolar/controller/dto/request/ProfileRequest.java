@@ -10,6 +10,8 @@ import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+import java.util.stream.Collectors;
+
 @Getter
 @Setter
 @Component
@@ -17,7 +19,6 @@ public class ProfileRequest implements IRequest<ProfileRequest, Profile> {
 
     private UUID id;
     private String name;
-    private String key;
     private String description;
     private Boolean active = Boolean.TRUE;
 
@@ -29,7 +30,7 @@ public class ProfileRequest implements IRequest<ProfileRequest, Profile> {
         Profile profile = Profile.builder()
                 .id(profileRequest.getId())
                 .name(profileRequest.getName())
-                .key(profileRequest.getKey())
+                .key(profileRequest.getName().toUpperCase())
                 .description(profileRequest.getDescription())
                 .active(profileRequest.getActive())
                 .build();
@@ -47,7 +48,7 @@ public class ProfileRequest implements IRequest<ProfileRequest, Profile> {
                         permission.setId(permissionId);
                         return permission;
                     })
-                    .toList();
+                    .collect(Collectors.toCollection(ArrayList::new));
 
             ProfileResource profileResource = new ProfileResource();
 

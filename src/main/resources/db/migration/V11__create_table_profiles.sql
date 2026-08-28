@@ -17,12 +17,14 @@ CREATE TABLE profiles (
 );
 
 INSERT INTO profiles (
+    id,
     name,
     key,
     description,
     active
 )
 VALUES (
+        'a747e317-12b2-4e97-82ac-d583ea704141',
            'ADMIN',
            'ADMIN',
            'Perfil de administrador do sistema',
