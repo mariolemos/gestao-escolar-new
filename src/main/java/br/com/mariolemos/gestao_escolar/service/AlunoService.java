@@ -7,6 +7,7 @@ import br.com.mariolemos.gestao_escolar.exception.BusinessException;
 import br.com.mariolemos.gestao_escolar.exception.RegraDeNegocioException;
 import br.com.mariolemos.gestao_escolar.model.Aluno;
 import br.com.mariolemos.gestao_escolar.model.Responsavel;
+import br.com.mariolemos.gestao_escolar.model.Contato;
 import br.com.mariolemos.gestao_escolar.repository.AlunoRepository;
 import br.com.mariolemos.gestao_escolar.repository.ColegioRepository;
 import br.com.mariolemos.gestao_escolar.repository.ResponsavelRepository;
@@ -27,6 +28,9 @@ public class AlunoService {
     private AlunoRepository alunoRepository;
     @Autowired
     private UsuarioLogado usuarioLogado;
+
+    @Autowired
+    private ContatoService contatoService;
 
     @Autowired
     private ResponsavelRepository responsavelRepository;
@@ -79,6 +83,7 @@ public class AlunoService {
 
     public Aluno atualizar(Aluno aluno, Long id){
         Aluno alunoAtualizado = buscarPorId(id);
+
         alunoAtualizado.setNome(aluno.getNome());
         alunoAtualizado.setRg(aluno.getRg());
         alunoAtualizado.setCpf(aluno.getCpf());
@@ -92,11 +97,16 @@ public class AlunoService {
         alunoAtualizado.setConvenioMedico(aluno.getConvenioMedico());
         alunoAtualizado.setColegio(aluno.getColegio());
         alunoAtualizado.setResponsavel(aluno.getResponsavel());
+
+        List<Contato> contatos = alunoAtualizado.getContatos();
+        contatoService.deleteAll(contatos);
+        alunoAtualizado.setContatos(aluno.getContatos());
+
         alunoAtualizado.setEndereco(aluno.getEndereco());
 
-        alunoRepository.save(alunoAtualizado);
+        return alunoRepository.save(alunoAtualizado);
 
-        return alunoAtualizado;
+
     }
 
     public void excluir(Long id){

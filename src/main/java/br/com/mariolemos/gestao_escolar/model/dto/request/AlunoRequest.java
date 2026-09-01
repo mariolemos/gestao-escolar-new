@@ -59,7 +59,12 @@ public class AlunoRequest extends PessoaDto {
        aluno.setConvenioMedico(alunoRequest.getConvenioMedico());
        aluno.setColegio(colegio);
        aluno.setResponsavel(responsavel);
-//       aluno.setEndereco(EnderecoRequest.of(alunoRequest.getEndereco()));
+       if(alunoRequest.endereco != null) {
+            aluno.setEndereco(EnderecoRequest.of(alunoRequest.getEndereco()));
+        }
+        if(!alunoRequest.contatos.isEmpty()) {
+            aluno.setContatos(ContatoRequest.of(alunoRequest.getContatos()));
+        }
 
        return aluno;
     }

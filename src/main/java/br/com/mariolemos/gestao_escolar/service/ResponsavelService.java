@@ -3,6 +3,8 @@ package br.com.mariolemos.gestao_escolar.service;
 import br.com.mariolemos.gestao_escolar.configuration.UsuarioLogado;
 import br.com.mariolemos.gestao_escolar.exception.BusinessException;
 import br.com.mariolemos.gestao_escolar.exception.RegraDeNegocioException;
+import br.com.mariolemos.gestao_escolar.model.Contato;
+import br.com.mariolemos.gestao_escolar.model.Endereco;
 import br.com.mariolemos.gestao_escolar.model.Responsavel;
 import br.com.mariolemos.gestao_escolar.repository.ResponsavelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,12 +72,11 @@ public class ResponsavelService {
         responsavel1.setRg(responsavel.getRg());
         responsavel1.setParentesco(responsavel.getParentesco());
 
-        contatoService.deleteAll(responsavel1.getContatos());
+        List<Contato> contatos = responsavel1.getContatos();
+        contatoService.deleteAll(contatos);
         responsavel1.setContatos(responsavel.getContatos());
 
         if (responsavel.getEndereco() != null) {
-//            responsavel1.setEndereco(new Endereco());
-//            responsavel1.getEndereco().setId(responsavel.getEndereco().getId());
             responsavel1.getEndereco().setLogradouro(responsavel.getEndereco().getLogradouro());
             responsavel1.getEndereco().setBairro(responsavel.getEndereco().getBairro());
             responsavel1.getEndereco().setCep(responsavel.getEndereco().getCep());
