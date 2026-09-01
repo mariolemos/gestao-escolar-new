@@ -25,8 +25,9 @@ public class ResponsavelResponse extends PessoaDto {
         this.id = responsavel.getId();
         this.parentesco = responsavel.getParentesco();
         this.contatos = ContatoResponse.of(responsavel.getContatos());
-        this.endereco = EnderecoResponse.of(responsavel.getEndereco());
-
+        if(responsavel.getEndereco() != null) {
+            this.endereco = EnderecoResponse.of(responsavel.getEndereco());
+        }
         super.setNome(responsavel.getNome());
         super.setRg(responsavel.getRg());
         super.setCpf(responsavel.getCpf());

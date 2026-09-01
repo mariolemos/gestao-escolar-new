@@ -4,7 +4,7 @@ drop table if exists contrato;
 
 drop table if exists responsavel;
 
-create table if not exists `PESSOA`(
+create table `PESSOA`(
     ID bigint not null auto_increment primary key,
     NOME VARCHAR(100),
     DATA_NASCIMENTO DATE,

@@ -30,9 +30,9 @@ public class ColegioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Colegio> atualizar(@RequestBody Colegio colegio, @PathVariable("id") Long id){
-        Colegio colegio1 = colegioService.atualizar(colegio, id);
-        return ResponseEntity.ok().body(colegio1);
+    public ResponseEntity<ColegioResponse> atualizar(@RequestBody ColegioRequest colegioRequest, @PathVariable("id") Long id){
+        Colegio colegio = colegioService.atualizar(ColegioRequest.of(colegioRequest), id);
+        return ResponseEntity.ok().body(new ColegioResponse(colegio));
     }
 
     @PostMapping

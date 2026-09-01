@@ -1,9 +1,12 @@
-create table if not exists `CONTATO`(
-    ID bigint not null auto_increment primary key,
+create table CONTATO(
+    ID bigint GENERATED ALWAYS AS IDENTITY  not null primary key,
         TIPO_CONTATO VARCHAR(10) not null,
         CONTATO VARCHAR(100) not null,
         COLEGIO_ID bigint,
-                foreign key (COLEGIO_ID) references COLEGIO(ID)
+        PESSOA_ID bigint,
+
+        foreign key (PESSOA_ID) references PESSOA(ID),
+        foreign key (COLEGIO_ID) references COLEGIO(ID)
     );
 
 

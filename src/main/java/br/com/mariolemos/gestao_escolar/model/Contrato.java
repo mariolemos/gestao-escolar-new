@@ -11,12 +11,14 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-//@Entity
-//@Table(name = "CONTRATO")
+@Entity
+@Table(name = "CONTRATO")
 public class Contrato {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,25 +28,32 @@ public class Contrato {
     @Column(name = "VALOR_CONTRATUAL")
     private BigDecimal valorContratual;
     @Column(name = "DATA_PAGAMENTO")
-    private LocalDate dtPagamento;
+    private LocalDate dataPagamento;
     @Column(name = "FORMA_PAGAMENTO")
     @Enumerated(value = EnumType.STRING)
     private FormaPagamento formaPagamento;
     @Column(name = "DATA_INICIAL")
-    private LocalDate dtInicial;
+    private LocalDate dataInicial;
     @Column(name = "DATA_FINAL")
-    private LocalDate dtFinal;
+    private LocalDate dataFinal;
     @Column(name = "ATIVO")
     private Boolean ativo;
     @Column(name = "DIA_PAGAMENTO")
     private Integer diaPagamento;
     @Column(name = "VALOR_MENSAL")
     private BigDecimal valorMensal;
-//    @ManyToOne
-//    private Responsavel responsavel;
+    @Column(name = "VALOR_DESCONTO")
+    private BigDecimal valorDesconto;
+    @Column(name = "DATA_INATIVACAO")
+    private LocalDate dataInativacao;
+    @ManyToOne()
+    @JoinColumn(name = "RESPONSAVEL_Id")
+    private Responsavel responsavel;
+    @OneToMany(mappedBy = "contrato")
+    private List<Aluno> alunos = new ArrayList<>();
 
     public void calcularMensalidade() {
-        int parcelas = dtFinal.getMonthValue() - dtInicial.getMonthValue() + 1;
+        int parcelas = dataFinal.getMonthValue() - dataInicial.getMonthValue() + 1;
         BigDecimal mensalidade = valorContratual;
         this.valorMensal = mensalidade.divide(new BigDecimal(parcelas), 2, RoundingMode.HALF_UP);
     }

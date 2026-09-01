@@ -35,8 +35,14 @@ public class ColegioRequest {
 
         colegio.setNome(colegioRequest.getNome());
         colegio.setHorario(colegioRequest.getHorario());
-        colegio.setEndereco(EnderecoRequest.of(colegioRequest.getEndereco()));
-        colegio.setContatos(ContatoRequest.of(colegioRequest.getContatos()));
+        if(colegioRequest.endereco != null) {
+            colegio.setEndereco(EnderecoRequest.of(colegioRequest.getEndereco()));
+        }
+
+        if(!colegioRequest.contatos.isEmpty() ) {
+            colegio.setContatos(ContatoRequest.of(colegioRequest.getContatos()));
+        }
+
         return colegio;
     }
 }

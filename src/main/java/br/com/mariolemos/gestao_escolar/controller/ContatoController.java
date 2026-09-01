@@ -1,12 +1,17 @@
 package br.com.mariolemos.gestao_escolar.controller;
 
+import br.com.mariolemos.gestao_escolar.model.Aluno;
 import br.com.mariolemos.gestao_escolar.model.Contato;
+import br.com.mariolemos.gestao_escolar.model.Contrato;
+import br.com.mariolemos.gestao_escolar.model.dto.response.AlunoResponse;
 import br.com.mariolemos.gestao_escolar.model.dto.response.ContatoResponse;
+import br.com.mariolemos.gestao_escolar.model.dto.response.ContratoResponse;
 import br.com.mariolemos.gestao_escolar.service.ContatoService;
 import br.com.mariolemos.gestao_escolar.service.ContratoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +29,5 @@ public class ContatoController {
         List<Contato> contatos = contatoService.buscar();
         return ResponseEntity.ok().body(ContatoResponse.of(contatos));
     }
-
 
 }

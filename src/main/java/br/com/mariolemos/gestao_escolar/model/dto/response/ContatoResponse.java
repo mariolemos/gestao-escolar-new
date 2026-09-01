@@ -16,11 +16,13 @@ public class ContatoResponse {
     private Long id;
     private String contato;
     private String tipo;
+    private Integer tipoId;
 
     public ContatoResponse(Contato contato){
         this.id = contato.getId();
         this.contato = contato.getContato();
         this.tipo = contato.getTipo().getDescricao();
+        this.tipoId = contato.getTipo().getId();
     }
     public static List<ContatoResponse> of(List<Contato> contatos) {
         return contatos.stream().map(ContatoResponse::new).collect(Collectors.toList());
