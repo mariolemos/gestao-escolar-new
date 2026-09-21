@@ -28,6 +28,7 @@ public class ColegioService {
     public Colegio incluir(Colegio colegio){
         return colegioRepository.save(colegio);
     }
+
     public Colegio atualizar(Colegio colegio, Long id){
 
         Colegio colegio1 = buscarPorId(id);

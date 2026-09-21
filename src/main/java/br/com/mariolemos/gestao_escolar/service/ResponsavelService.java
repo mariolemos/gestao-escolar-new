@@ -4,7 +4,6 @@ import br.com.mariolemos.gestao_escolar.configuration.UsuarioLogado;
 import br.com.mariolemos.gestao_escolar.exception.BusinessException;
 import br.com.mariolemos.gestao_escolar.exception.RegraDeNegocioException;
 import br.com.mariolemos.gestao_escolar.model.Contato;
-import br.com.mariolemos.gestao_escolar.model.Endereco;
 import br.com.mariolemos.gestao_escolar.model.Responsavel;
 import br.com.mariolemos.gestao_escolar.repository.ResponsavelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ public class ResponsavelService {
 
     public Responsavel buscarPorId(Long id) {
         Responsavel responsavel = responsavelRepository.findById(id).orElseThrow(() -> new BusinessException("Recurso não encontrado"));
-        if(!responsavel.getId().equals(buscarPorCpf(usuarioLogado.getUserName()).getId())){
+        if(usuarioLogado.getPerfil().equalsIgnoreCase(PERFIL_RESPONSAVEL) && !responsavel.getId().equals(buscarPorCpf(usuarioLogado.getUserName()).getId())){
             throw new BusinessException(MSG_USUARIO_SEM_PERMISSAO);
         }
         return responsavel;
@@ -62,7 +61,7 @@ public class ResponsavelService {
 
         Responsavel responsavel1 = buscarPorId(id);
 
-        if(!responsavel.getId().equals(buscarPorCpf(usuarioLogado.getUserName()).getId())){
+        if(usuarioLogado.getPerfil().equalsIgnoreCase(PERFIL_RESPONSAVEL) && !responsavel.getId().equals(buscarPorCpf(usuarioLogado.getUserName()).getId())){
             throw new BusinessException(MSG_USUARIO_SEM_PERMISSAO);
         }
 
@@ -90,8 +89,6 @@ public class ResponsavelService {
 
     public Responsavel buscarCpf(String cpf) {
        if(responsavelRepository.existsBycpf(cpf)) {
-//           Responsavel responsavel = new Responsavel();
-//           responsavel.setCpf(responsavel.getCpf(cpf));
            return buscarCpf(cpf);
        }
        return null;

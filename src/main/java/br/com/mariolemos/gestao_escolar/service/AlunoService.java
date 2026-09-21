@@ -102,11 +102,17 @@ public class AlunoService {
         contatoService.deleteAll(contatos);
         alunoAtualizado.setContatos(aluno.getContatos());
 
-        alunoAtualizado.setEndereco(aluno.getEndereco());
 
+        if(aluno.getEndereco() != null) {
+            alunoAtualizado.getEndereco().setCep(aluno.getEndereco().getCep());
+            alunoAtualizado.getEndereco().setLogradouro(aluno.getEndereco().getLogradouro());
+            alunoAtualizado.getEndereco().setNumero(aluno.getEndereco().getNumero());
+            alunoAtualizado.getEndereco().setComplemento(aluno.getEndereco().getComplemento());
+            alunoAtualizado.getEndereco().setBairro(aluno.getEndereco().getBairro());
+            alunoAtualizado.getEndereco().setCidade(aluno.getEndereco().getCidade());
+            alunoAtualizado.getEndereco().setEstado(aluno.getEndereco().getEstado());
+        }
         return alunoRepository.save(alunoAtualizado);
-
-
     }
 
     public void excluir(Long id){
