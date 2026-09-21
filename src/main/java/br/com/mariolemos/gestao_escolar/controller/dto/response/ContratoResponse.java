@@ -1,8 +1,7 @@
-package br.com.mariolemos.gestao_escolar.model.dto.response;
+package br.com.mariolemos.gestao_escolar.controller.dto.response;
 
 import br.com.mariolemos.gestao_escolar.enumerations.FormaPagamento;
 import br.com.mariolemos.gestao_escolar.model.Contrato;
-import br.com.mariolemos.gestao_escolar.model.Responsavel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

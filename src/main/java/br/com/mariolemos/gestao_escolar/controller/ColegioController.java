@@ -1,8 +1,8 @@
 package br.com.mariolemos.gestao_escolar.controller;
 
 import br.com.mariolemos.gestao_escolar.model.Colegio;
-import br.com.mariolemos.gestao_escolar.model.dto.request.ColegioRequest;
-import br.com.mariolemos.gestao_escolar.model.dto.response.ColegioResponse;
+import br.com.mariolemos.gestao_escolar.controller.dto.request.ColegioRequest;
+import br.com.mariolemos.gestao_escolar.controller.dto.response.ColegioResponse;
 import br.com.mariolemos.gestao_escolar.service.ColegioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

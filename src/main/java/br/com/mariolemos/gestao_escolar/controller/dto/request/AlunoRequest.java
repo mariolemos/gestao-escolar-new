@@ -1,10 +1,9 @@
-package br.com.mariolemos.gestao_escolar.model.dto.request;
+package br.com.mariolemos.gestao_escolar.controller.dto.request;
 
 import br.com.mariolemos.gestao_escolar.model.Aluno;
 import br.com.mariolemos.gestao_escolar.model.Colegio;
-import br.com.mariolemos.gestao_escolar.model.Endereco;
 import br.com.mariolemos.gestao_escolar.model.Responsavel;
-import br.com.mariolemos.gestao_escolar.model.dto.PessoaDto;
+import br.com.mariolemos.gestao_escolar.controller.dto.PessoaDto;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;

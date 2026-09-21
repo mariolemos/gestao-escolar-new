@@ -1,8 +1,8 @@
 package br.com.mariolemos.gestao_escolar.controller;
 
 import br.com.mariolemos.gestao_escolar.model.Responsavel;
-import br.com.mariolemos.gestao_escolar.model.dto.request.ResponsavelRequest;
-import br.com.mariolemos.gestao_escolar.model.dto.response.ResponsavelResponse;
+import br.com.mariolemos.gestao_escolar.controller.dto.request.ResponsavelRequest;
+import br.com.mariolemos.gestao_escolar.controller.dto.response.ResponsavelResponse;
 import br.com.mariolemos.gestao_escolar.service.ResponsavelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

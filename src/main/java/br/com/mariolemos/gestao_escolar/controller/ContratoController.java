@@ -1,8 +1,8 @@
 package br.com.mariolemos.gestao_escolar.controller;
 
 import br.com.mariolemos.gestao_escolar.model.Contrato;
-import br.com.mariolemos.gestao_escolar.model.dto.request.ContratoRequest;
-import br.com.mariolemos.gestao_escolar.model.dto.response.ContratoResponse;
+import br.com.mariolemos.gestao_escolar.controller.dto.request.ContratoRequest;
+import br.com.mariolemos.gestao_escolar.controller.dto.response.ContratoResponse;
 import br.com.mariolemos.gestao_escolar.service.ContratoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

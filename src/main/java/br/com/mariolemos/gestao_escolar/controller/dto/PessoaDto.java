@@ -1,11 +1,10 @@
-package br.com.mariolemos.gestao_escolar.model.dto;
+package br.com.mariolemos.gestao_escolar.controller.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 

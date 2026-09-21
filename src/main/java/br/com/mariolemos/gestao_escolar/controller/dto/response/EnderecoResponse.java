@@ -1,7 +1,6 @@
-package br.com.mariolemos.gestao_escolar.model.dto.response;
+package br.com.mariolemos.gestao_escolar.controller.dto.response;
 
 import br.com.mariolemos.gestao_escolar.model.Endereco;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

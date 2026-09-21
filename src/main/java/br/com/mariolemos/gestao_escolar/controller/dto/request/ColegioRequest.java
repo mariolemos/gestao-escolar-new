@@ -1,7 +1,5 @@
-package br.com.mariolemos.gestao_escolar.model.dto.request;
+package br.com.mariolemos.gestao_escolar.controller.dto.request;
 import br.com.mariolemos.gestao_escolar.model.Colegio;
-import br.com.mariolemos.gestao_escolar.model.Endereco;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;

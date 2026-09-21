@@ -1,4 +1,4 @@
-package br.com.mariolemos.gestao_escolar.model.dto.request;
+package br.com.mariolemos.gestao_escolar.controller.dto.request;
 
 import br.com.mariolemos.gestao_escolar.enumerations.TipoContato;
 import br.com.mariolemos.gestao_escolar.model.Contato;

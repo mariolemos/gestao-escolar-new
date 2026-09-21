@@ -1,7 +1,7 @@
-package br.com.mariolemos.gestao_escolar.model.dto.response;
+package br.com.mariolemos.gestao_escolar.controller.dto.response;
 
 import br.com.mariolemos.gestao_escolar.model.*;
-import br.com.mariolemos.gestao_escolar.model.dto.PessoaDto;
+import br.com.mariolemos.gestao_escolar.controller.dto.PessoaDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

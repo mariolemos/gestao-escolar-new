@@ -1,4 +1,4 @@
-package br.com.mariolemos.gestao_escolar.model.dto.response;
+package br.com.mariolemos.gestao_escolar.controller.dto.response;
 import br.com.mariolemos.gestao_escolar.model.Colegio;
 import lombok.AllArgsConstructor;
 import lombok.Data;
