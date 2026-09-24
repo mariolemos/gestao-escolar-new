@@ -5,6 +5,7 @@ import br.com.mariolemos.gestao_escolar.model.Contato;
 import br.com.mariolemos.gestao_escolar.model.Endereco;
 import br.com.mariolemos.gestao_escolar.repository.ColegioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class ColegioService {
     private ContatoService contatoService;
 
     public List<Colegio> buscar(){
-        List<Colegio> colegios = colegioRepository.findAll();
+        List<Colegio> colegios = colegioRepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
         return colegios;
     }
     public Colegio buscarPorId(Long id){

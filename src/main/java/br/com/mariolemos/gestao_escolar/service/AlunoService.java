@@ -12,14 +12,14 @@ import br.com.mariolemos.gestao_escolar.repository.AlunoRepository;
 import br.com.mariolemos.gestao_escolar.repository.ColegioRepository;
 import br.com.mariolemos.gestao_escolar.repository.ResponsavelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static br.com.mariolemos.gestao_escolar.constrants.Constrants.MSG_USUARIO_SEM_PERMISSAO;
+import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
 
 @Service
 public class AlunoService {
@@ -43,7 +43,9 @@ public class AlunoService {
                 return new ArrayList<>();
             }
         }
-        return alunoRepository.findAll();
+        List<Aluno> alunos = alunoRepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
+
+        return alunos;
     }
 
     public Aluno buscarPorCpf(String cpf) {

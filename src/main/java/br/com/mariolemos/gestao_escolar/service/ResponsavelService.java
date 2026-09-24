@@ -7,6 +7,7 @@ import br.com.mariolemos.gestao_escolar.model.Contato;
 import br.com.mariolemos.gestao_escolar.model.Responsavel;
 import br.com.mariolemos.gestao_escolar.repository.ResponsavelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class ResponsavelService {
             }
         }
 
-        return responsavelRepository.findAll();
+        return responsavelRepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
     }
 
     public Responsavel buscarPorId(Long id) {
