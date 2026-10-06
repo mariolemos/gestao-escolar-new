@@ -52,9 +52,14 @@ public class Contrato {
     @OneToMany(mappedBy = "contrato")
     private List<Aluno> alunos = new ArrayList<>();
 
-    public void calcularMensalidade() {
-        int parcelas = dataFinal.getMonthValue() - dataInicial.getMonthValue() + 1;
+    public BigDecimal calcularMensalidade() {
         BigDecimal mensalidade = valorContratual;
-        this.valorMensal = mensalidade.divide(new BigDecimal(parcelas), 2, RoundingMode.HALF_UP);
+        this.valorMensal = mensalidade.divide(new BigDecimal(calcularQtdoParcelas()), 2, RoundingMode.HALF_UP);
+        return mensalidade;
+    }
+
+    public int calcularQtdoParcelas() {
+        int numParcelas = dataFinal.getMonthValue() - dataInicial.getMonthValue() + 1;
+        return numParcelas;
     }
 }

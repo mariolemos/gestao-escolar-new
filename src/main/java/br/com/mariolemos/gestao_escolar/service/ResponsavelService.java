@@ -3,6 +3,7 @@ package br.com.mariolemos.gestao_escolar.service;
 import br.com.mariolemos.gestao_escolar.configuration.UsuarioLogado;
 import br.com.mariolemos.gestao_escolar.exception.BusinessException;
 import br.com.mariolemos.gestao_escolar.exception.RegraDeNegocioException;
+import br.com.mariolemos.gestao_escolar.model.Aluno;
 import br.com.mariolemos.gestao_escolar.model.Contato;
 import br.com.mariolemos.gestao_escolar.model.Responsavel;
 import br.com.mariolemos.gestao_escolar.repository.ResponsavelRepository;
@@ -28,8 +29,8 @@ public class ResponsavelService {
     private UsuarioLogado usuarioLogado;
 
     public List<Responsavel> buscar() {
-        if(usuarioLogado.getPerfil().equalsIgnoreCase(PERFIL_RESPONSAVEL)){
-            try{
+        if (usuarioLogado.getPerfil().equalsIgnoreCase(PERFIL_RESPONSAVEL)) {
+            try {
                 return Collections.singletonList(buscarPorCpf(usuarioLogado.getUserName()));
             } catch (BusinessException e) {
                 return new ArrayList<>();
@@ -41,7 +42,7 @@ public class ResponsavelService {
 
     public Responsavel buscarPorId(Long id) {
         Responsavel responsavel = responsavelRepository.findById(id).orElseThrow(() -> new BusinessException("Recurso não encontrado"));
-        if(usuarioLogado.getPerfil().equalsIgnoreCase(PERFIL_RESPONSAVEL) && !responsavel.getId().equals(buscarPorCpf(usuarioLogado.getUserName()).getId())){
+        if (usuarioLogado.getPerfil().equalsIgnoreCase(PERFIL_RESPONSAVEL) && !responsavel.getId().equals(buscarPorCpf(usuarioLogado.getUserName()).getId())) {
             throw new BusinessException(MSG_USUARIO_SEM_PERMISSAO);
         }
         return responsavel;
@@ -52,7 +53,7 @@ public class ResponsavelService {
     }
 
     public Responsavel incluir(Responsavel responsavel) {
-        if(responsavelRepository.existsBycpf(responsavel.getCpf())) {
+        if (responsavelRepository.existsBycpf(responsavel.getCpf())) {
             throw new RegraDeNegocioException("Este CPF já está cadastrado");
         }
         return responsavelRepository.save(responsavel);
@@ -62,7 +63,7 @@ public class ResponsavelService {
 
         Responsavel responsavel1 = buscarPorId(id);
 
-        if(usuarioLogado.getPerfil().equalsIgnoreCase(PERFIL_RESPONSAVEL) && !responsavel.getId().equals(buscarPorCpf(usuarioLogado.getUserName()).getId())){
+        if (usuarioLogado.getPerfil().equalsIgnoreCase(PERFIL_RESPONSAVEL) && !responsavel.getId().equals(buscarPorCpf(usuarioLogado.getUserName()).getId())) {
             throw new BusinessException(MSG_USUARIO_SEM_PERMISSAO);
         }
 
@@ -89,9 +90,9 @@ public class ResponsavelService {
     }
 
     public Responsavel buscarCpf(String cpf) {
-       if(responsavelRepository.existsBycpf(cpf)) {
-           return buscarCpf(cpf);
-       }
-       return null;
+        if (responsavelRepository.existsBycpf(cpf)) {
+            return buscarCpf(cpf);
+        }
+        return null;
     }
 }
