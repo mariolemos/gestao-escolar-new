@@ -27,11 +27,6 @@ public class Contrato {
     private Long id;
     @Column(name = "VALOR_CONTRATUAL")
     private BigDecimal valorContratual;
-    @Column(name = "DATA_PAGAMENTO")
-    private LocalDate dataPagamento;
-    @Column(name = "FORMA_PAGAMENTO")
-    @Enumerated(value = EnumType.STRING)
-    private FormaPagamento formaPagamento;
     @Column(name = "DATA_INICIAL")
     private LocalDate dataInicial;
     @Column(name = "DATA_FINAL")
@@ -51,8 +46,10 @@ public class Contrato {
     private Responsavel responsavel;
     @OneToMany(mappedBy = "contrato")
     private List<Aluno> alunos = new ArrayList<>();
+    @OneToMany(mappedBy = "contrato")
+    private List<Mensalidade> mensalidades = new ArrayList<>();
 
-    public BigDecimal calcularMensalidade() {
+    public BigDecimal calcularValorMensal() {
         BigDecimal mensalidade = valorContratual;
         this.valorMensal = mensalidade.divide(new BigDecimal(calcularQtdoParcelas()), 2, RoundingMode.HALF_UP);
         return mensalidade;

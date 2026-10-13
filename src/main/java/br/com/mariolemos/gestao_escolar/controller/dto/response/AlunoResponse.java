@@ -45,12 +45,9 @@ public class AlunoResponse extends PessoaDto {
         this.colegioId = aluno.getColegio().getId();
         this.responsavelId = aluno.getResponsavel().getId();
         this.contatos = ContatoResponse.of(aluno.getContatos());
-
-
     }
 
     public static List<AlunoResponse> of(List<Aluno> alunos) {
-       // return alunos.stream().map(Aluno alu -> new AlunoResponse(alu)).collect(Collectors.toList());
         return alunos.stream().map(AlunoResponse::new).collect(Collectors.toList());
     }
 

@@ -31,8 +31,8 @@ public class ContratoResponse {
     public ContratoResponse(Contrato contrato) {
         this.id = contrato.getId();
         this.valorContratual = contrato.getValorContratual();
-        this.dataPagamento = contrato.getDataPagamento();
-        this.formaPagamento = contrato.getFormaPagamento();
+//        this.dataPagamento = contrato.getDataPagamento();
+//        this.formaPagamento = contrato.getFormaPagamento();
         this.dataInicial = contrato.getDataInicial();
         this.dataFinal = contrato.getDataFinal();
         this.ativo = contrato.getAtivo();

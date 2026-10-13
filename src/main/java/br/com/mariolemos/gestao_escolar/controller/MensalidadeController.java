@@ -19,7 +19,7 @@ public class MensalidadeController {
 
     @PostMapping
     public ResponseEntity<MensalidadeResponse> incluir(@RequestBody MensalidadeRequest mensalidadeRequest) {
-        Mensalidade mensalidade = mensalidadeService.incluir(MensalidadeRequest.Of(mensalidadeRequest));
+        Mensalidade mensalidade = mensalidadeService.incluir(MensalidadeRequest.Of(mensalidadeRequest), mensalidadeRequest.getContratoId());
         return ResponseEntity.ok().body(new MensalidadeResponse(mensalidade));
     }
 

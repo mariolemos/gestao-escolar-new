@@ -21,24 +21,21 @@ public class MensalidadeRequest {
     private BigDecimal valorMensal;
     private BigDecimal valorDesconto;
     private BigDecimal jurosMora;
-    private Long alunoId;
+    private Long contratoId;
 
     public  static Mensalidade Of(MensalidadeRequest mensalidadeRequest) {
 
         Mensalidade mensalidade = new Mensalidade();
 
-        Aluno aluno = new Aluno();
-        aluno.setId(mensalidadeRequest.getAlunoId());
-
         Contrato contrato = new Contrato();
+        contrato.setId(mensalidadeRequest.getContratoId());
 
         mensalidade.setMes(mensalidadeRequest.getMes());
         mensalidade.setAno(mensalidadeRequest.getAno());
         mensalidade.setValorMensal(contrato.getValorMensal());
         mensalidade.setDesconto(mensalidadeRequest.getValorDesconto());
         mensalidade.setJurosMora(mensalidadeRequest.getJurosMora());
-        mensalidade.setAluno(aluno);
-
+        mensalidade.setContrato(contrato);
         return mensalidade;
     }
 

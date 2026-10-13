@@ -18,7 +18,7 @@ public class ResponsavelResponse extends PessoaDto {
     private Long id;
     private String parentesco;
     private List<ContatoResponse> contatos = new ArrayList<>();
-    //private List<Aluno> alunos = new ArrayList<>();
+    private List<AlunoResponse> alunos = new ArrayList<>();
     private EnderecoResponse endereco;
 
     public ResponsavelResponse(Responsavel responsavel) {
@@ -28,6 +28,7 @@ public class ResponsavelResponse extends PessoaDto {
         if(responsavel.getEndereco() != null) {
             this.endereco = EnderecoResponse.of(responsavel.getEndereco());
         }
+        this.alunos = AlunoResponse.of(responsavel.getAlunos());
         super.setNome(responsavel.getNome());
         super.setRg(responsavel.getRg());
         super.setCpf(responsavel.getCpf());
@@ -35,22 +36,7 @@ public class ResponsavelResponse extends PessoaDto {
 
     }
 
-//    public ResponsavelResponse of(Responsavel responsavel) {
-//
-//
-//        if (responsavel.getContratos() != null) {
-//            this.contratos = responsavel.getContratos();
-//        }
-//
-//        if (responsavel.getAlunos() != null) {
-//            this.alunos = responsavel.getAlunos();
-//        }
-//        return ;
-//
-//    }
-
     public static List<ResponsavelResponse> of(List<Responsavel> responsaveis) {
-        //return responsaveis.stream().map(Responsavel resp -> new ResponsavelResponse(resp)).collect(Collectors.toList());
         return responsaveis.stream().map(ResponsavelResponse::new).collect(Collectors.toList());
     }
 

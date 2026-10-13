@@ -36,11 +36,18 @@ public class Mensalidade {
     private BigDecimal jurosMora;
     @Column(name = "VALOR_PAGO")
     private BigDecimal valorPago;
+    @Column(name = "SITUACAO")
     @Enumerated(EnumType.STRING)
     private SituacaoMensalidade situacao = SituacaoMensalidade.PENDENTE;
-    @ManyToOne
-    @JoinColumn(name = "ALUNO_ID")
-    private Aluno aluno;
+    @Column(name = "FORMA_PAGAMENTO")
+    @Enumerated(EnumType.STRING)
+    private FormaPagamento formaPagamento;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CONTRATO_ID")
+    private Contrato contrato;
+//    @ManyToOne
+//    @JoinColumn(name = "ALUNO_ID")
+//    private Aluno aluno;
 
     public BigDecimal calcularValorPago() {
         this.valorPago = this.valorMensal.subtract(this.desconto).add(this.jurosMora);

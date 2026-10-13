@@ -43,9 +43,9 @@ public class ContratoService {
         Long responsavelId = contrato.getResponsavel().getId();
         boolean possuiContratoAtivo = contratoRepository.existsByResponsavelIdAndAtivo(responsavelId, contrato.getAtivo());
         if (possuiContratoAtivo) {
-            throw new RegraDeNegocioException("Este responsávbel já possui um contrato ativo.");
+            throw new RegraDeNegocioException("Este responsável já possui um contrato ativo.");
         }
-        contrato.calcularMensalidade();
+        contrato.calcularValorMensal();
         return contratoRepository.save(contrato);
     }
 }

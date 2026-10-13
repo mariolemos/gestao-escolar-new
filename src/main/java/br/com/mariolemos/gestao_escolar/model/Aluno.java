@@ -42,6 +42,6 @@ public class Aluno extends Pessoa{
     private Colegio colegio;
     @ManyToOne
     private Responsavel responsavel;
-    @OneToMany(mappedBy = "aluno")
-    private List<Mensalidade> mensalidades = new ArrayList<>();
+//    @OneToMany(mappedBy = "aluno")
+//    private List<Mensalidade> mensalidades = new ArrayList<>();
 }

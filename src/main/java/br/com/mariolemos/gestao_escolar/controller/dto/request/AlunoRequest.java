@@ -40,7 +40,6 @@ public class AlunoRequest extends PessoaDto {
         Responsavel responsavel = new Responsavel();
         responsavel.setId(alunoRequest.getResponsavelId());
 
-
         Colegio colegio = new Colegio();
         colegio.setId(alunoRequest.getColegioId());
 

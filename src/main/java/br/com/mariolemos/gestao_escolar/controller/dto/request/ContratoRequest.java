@@ -34,8 +34,8 @@ public class ContratoRequest {
 
         Contrato contrato = new Contrato();
         contrato.setValorContratual(contratoRequest.getValorContratual());
-        contrato.setDataPagamento(contratoRequest.getDataPagamento());
-        contrato.setFormaPagamento(FormaPagamento.find(contratoRequest.getFormaPagamento()));
+//        contrato.setDataPagamento(contratoRequest.getDataPagamento());
+//        contrato.setFormaPagamento(FormaPagamento.find(contratoRequest.getFormaPagamento()));
         contrato.setDataInicial(contratoRequest.getDataInicial());
         contrato.setDataFinal(contratoRequest.getDataFinal());
         contrato.setAtivo(contratoRequest.getAtivo());

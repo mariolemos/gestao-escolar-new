@@ -23,7 +23,6 @@ public class Responsavel extends Pessoa{
     @OneToMany
     @JoinColumn(name = "RESPONSAVEL_ID")
     private List<Aluno> alunos = new ArrayList<>();
-
     private void prePesist(){
         this.getEndereco().setPessoa(this);
     }
