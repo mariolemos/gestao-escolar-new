@@ -45,9 +45,6 @@ public class Mensalidade {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CONTRATO_ID")
     private Contrato contrato;
-//    @ManyToOne
-//    @JoinColumn(name = "ALUNO_ID")
-//    private Aluno aluno;
 
     public BigDecimal calcularValorPago() {
         this.valorPago = this.valorMensal.subtract(this.desconto).add(this.jurosMora);

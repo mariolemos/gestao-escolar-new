@@ -18,7 +18,7 @@ public class ResponsavelResponse extends PessoaDto {
     private Long id;
     private String parentesco;
     private List<ContatoResponse> contatos = new ArrayList<>();
-    private List<AlunoResponse> alunos = new ArrayList<>();
+    private List<String> alunos = new ArrayList<>();
     private EnderecoResponse endereco;
 
     public ResponsavelResponse(Responsavel responsavel) {
@@ -28,7 +28,7 @@ public class ResponsavelResponse extends PessoaDto {
         if(responsavel.getEndereco() != null) {
             this.endereco = EnderecoResponse.of(responsavel.getEndereco());
         }
-        this.alunos = AlunoResponse.of(responsavel.getAlunos());
+        responsavel.getAlunos().forEach(alu -> this.alunos.add(alu.getNome()));
         super.setNome(responsavel.getNome());
         super.setRg(responsavel.getRg());
         super.setCpf(responsavel.getCpf());

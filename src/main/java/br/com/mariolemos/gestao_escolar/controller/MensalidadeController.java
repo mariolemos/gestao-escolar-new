@@ -17,11 +17,11 @@ public class MensalidadeController {
     @Autowired
     private MensalidadeService mensalidadeService;
 
-    @PostMapping
-    public ResponseEntity<MensalidadeResponse> incluir(@RequestBody MensalidadeRequest mensalidadeRequest) {
-        Mensalidade mensalidade = mensalidadeService.incluir(MensalidadeRequest.Of(mensalidadeRequest), mensalidadeRequest.getContratoId());
-        return ResponseEntity.ok().body(new MensalidadeResponse(mensalidade));
-    }
+//    @PostMapping
+//    public ResponseEntity<MensalidadeResponse> incluir(@RequestBody MensalidadeRequest mensalidadeRequest) {
+//        Mensalidade mensalidade = mensalidadeService.incluir(MensalidadeRequest.Of(mensalidadeRequest), mensalidadeRequest.getContratoId());
+//        return ResponseEntity.ok().body(new MensalidadeResponse(mensalidade));
+//    }
 
     @GetMapping
     public ResponseEntity<List<MensalidadeResponse>> listar(){
