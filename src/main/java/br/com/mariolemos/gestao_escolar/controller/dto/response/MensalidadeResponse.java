@@ -1,5 +1,6 @@
 package br.com.mariolemos.gestao_escolar.controller.dto.response;
 
+import br.com.mariolemos.gestao_escolar.enumerations.FormaPagamento;
 import br.com.mariolemos.gestao_escolar.enumerations.SituacaoMensalidade;
 import br.com.mariolemos.gestao_escolar.model.Aluno;
 import br.com.mariolemos.gestao_escolar.model.Mensalidade;
@@ -28,6 +29,8 @@ public class MensalidadeResponse {
     private BigDecimal valorPago;
     private SituacaoMensalidade situacao;
     private Long contratoId;
+    private String formaPagamento;
+    private Integer formaPagamentoId;
     private List<Aluno> alunos = new ArrayList<>();
 
     public MensalidadeResponse(Mensalidade mensalidade) {
@@ -41,6 +44,8 @@ public class MensalidadeResponse {
         this.desconto = mensalidade.getDesconto();
         this.jurosMora = mensalidade.getJurosMora();
         this.situacao = mensalidade.getSituacao();
+        this.formaPagamento = mensalidade.getFormaPagamento().getDescricao();
+        this.formaPagamentoId = mensalidade.getFormaPagamento().getId();
         this.contratoId = mensalidade.getContrato().getId();
         this.alunos = mensalidade.getContrato().getAlunos();
     }

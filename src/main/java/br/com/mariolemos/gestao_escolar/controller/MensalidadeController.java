@@ -28,4 +28,17 @@ public class MensalidadeController {
         List<Mensalidade> mensalidades = mensalidadeService.buscar();
         return ResponseEntity.ok().body(MensalidadeResponse.of(mensalidades));
     }
+
+    @PutMapping("/pagarMensalidade/{id}")
+    public ResponseEntity<MensalidadeResponse> pagarMensalidade(@RequestBody MensalidadeRequest mensalidadeRequest, @PathVariable("id") Long Id){
+        Mensalidade mensalidade = mensalidadeService.pagarMensalidade(MensalidadeRequest.Of(mensalidadeRequest), Id);
+        return ResponseEntity.ok().body(new MensalidadeResponse(mensalidade));
+    }
+
+    @GetMapping("/abonarMensalidade/{id}")
+    public ResponseEntity<MensalidadeResponse> abonarMensalidade(MensalidadeRequest mensalidadeRequest, @PathVariable("id") Long Id){
+        Mensalidade mensalidade = mensalidadeService.abonarMensalidade(MensalidadeRequest.Of(mensalidadeRequest), Id);
+        return ResponseEntity.ok().body(new MensalidadeResponse(mensalidade));
+    }
+
 }

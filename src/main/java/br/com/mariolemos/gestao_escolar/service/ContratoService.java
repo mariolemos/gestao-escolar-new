@@ -75,15 +75,11 @@ public class ContratoService {
             Month mes = Month.from(contrato.getDataInicial());
 
             mensalidade.setValorMensal(contrato.getValorMensal());
-//            contrato.calcularQtdoParcelas();
             mensalidade.setAno(ano.toString());
             mensalidade.setContrato(mensalidade.getContrato());
             mensalidade.setMes(mes.getDisplayName(TextStyle.FULL, new Locale("pt", "BR")));
             mensalidade.setContrato(contrato);
-
             mensalidades.add(mensalidade);
-
-
         }
 
         mensalidadeRepository.saveAll(mensalidades);

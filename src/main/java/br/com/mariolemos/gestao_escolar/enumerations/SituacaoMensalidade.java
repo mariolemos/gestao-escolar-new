@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public enum SituacaoMensalidade {
 
-
-
     PAGA(0, "PAGA"),
     PENDENTE(1, "PENDENTE"),
     ABONADA(2, "ABONADA"),

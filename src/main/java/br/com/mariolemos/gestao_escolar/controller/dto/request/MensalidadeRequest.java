@@ -1,5 +1,7 @@
 package br.com.mariolemos.gestao_escolar.controller.dto.request;
 
+import br.com.mariolemos.gestao_escolar.enumerations.FormaPagamento;
+import br.com.mariolemos.gestao_escolar.enumerations.SituacaoMensalidade;
 import br.com.mariolemos.gestao_escolar.model.Aluno;
 import br.com.mariolemos.gestao_escolar.model.Contrato;
 import br.com.mariolemos.gestao_escolar.model.Mensalidade;
@@ -8,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +25,8 @@ public class MensalidadeRequest {
     private BigDecimal valorDesconto;
     private BigDecimal jurosMora;
     private Long contratoId;
+    private LocalDate dataPagamento;
+    private Integer formaPagamento;
 
     public  static Mensalidade Of(MensalidadeRequest mensalidadeRequest) {
 
@@ -35,6 +40,8 @@ public class MensalidadeRequest {
         mensalidade.setValorMensal(contrato.getValorMensal());
         mensalidade.setDesconto(mensalidadeRequest.getValorDesconto());
         mensalidade.setJurosMora(mensalidadeRequest.getJurosMora());
+        mensalidade.setDtPagamento(mensalidadeRequest.getDataPagamento());
+        mensalidade.setFormaPagamento(FormaPagamento.find(mensalidadeRequest.getFormaPagamento()));
         mensalidade.setContrato(contrato);
         return mensalidade;
     }

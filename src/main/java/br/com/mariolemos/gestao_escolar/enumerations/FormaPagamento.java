@@ -18,9 +18,9 @@ public enum FormaPagamento {
     private String descricao;
 
     public static FormaPagamento find(Integer id){
-        for (FormaPagamento tipoContato : FormaPagamento.values()) {
-            if(tipoContato.getId() == id){
-                return tipoContato;
+        for (FormaPagamento formaPagamento : FormaPagamento.values()) {
+            if(formaPagamento.getId() == id){
+                return formaPagamento;
             }
         }
         throw new IllegalArgumentException("FormaPagamento não encontrada");
