@@ -14,10 +14,10 @@ public enum FormaPagamento {
     CARTAO(2, "CARTÃO"),
     TRANSFERENCIA(3, "TRANSFERÊNCIA");
 
-    private Integer id;
+    private int id;
     private String descricao;
 
-    public static FormaPagamento find(Integer id){
+    public static FormaPagamento find(int id){
         for (FormaPagamento formaPagamento : FormaPagamento.values()) {
             if(formaPagamento.getId() == id){
                 return formaPagamento;

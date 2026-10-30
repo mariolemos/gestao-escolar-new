@@ -41,7 +41,7 @@ public class MensalidadeRequest {
         mensalidade.setDesconto(mensalidadeRequest.getValorDesconto());
         mensalidade.setJurosMora(mensalidadeRequest.getJurosMora());
         mensalidade.setDtPagamento(mensalidadeRequest.getDataPagamento());
-        mensalidade.setFormaPagamento(FormaPagamento.find(mensalidadeRequest.getFormaPagamento()));
+//        mensalidade.setFormaPagamento(FormaPagamento.find(mensalidadeRequest.getFormaPagamento()));
         mensalidade.setContrato(contrato);
         return mensalidade;
     }

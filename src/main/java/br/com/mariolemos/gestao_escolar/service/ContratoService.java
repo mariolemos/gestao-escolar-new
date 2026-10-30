@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.Month;
 import java.time.Year;
 import java.time.format.TextStyle;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -67,9 +68,10 @@ public class ContratoService {
     public void gerarMensalidade(@NotNull Contrato contrato) {
 
         List<Mensalidade> mensalidades = new ArrayList<>();
+//        Mensalidade mensalidade = new Mensalidade();
 
         for (int i = 1; i <= contrato.calcularQtdoParcelas() ; i++) {
-            Mensalidade mensalidade = new Mensalidade();
+           Mensalidade mensalidade = new Mensalidade();
 
             Year ano = Year.from(contrato.getDataInicial());
             Month mes = Month.from(contrato.getDataInicial());
@@ -78,8 +80,17 @@ public class ContratoService {
             mensalidade.setAno(ano.toString());
             mensalidade.setContrato(mensalidade.getContrato());
             mensalidade.setMes(mes.getDisplayName(TextStyle.FULL, new Locale("pt", "BR")));
-            mensalidade.setContrato(contrato);
-            mensalidades.add(mensalidade);
+           // mensalidade.setVencimento(contrato.getDataInicial());
+            if(i == 1){
+                mensalidade.setVencimento(contrato.getDataInicial());
+                mensalidade.setContrato(contrato);
+                mensalidades.add(mensalidade);
+            }else {
+                mensalidade.setVencimento(mensalidades.getLast().getVencimento().plus(30, ChronoUnit.DAYS));
+                mensalidade.setContrato(contrato);
+                mensalidades.add(mensalidade);
+            }
+
         }
 
         mensalidadeRepository.saveAll(mensalidades);

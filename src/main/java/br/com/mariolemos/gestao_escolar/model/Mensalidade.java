@@ -36,12 +36,14 @@ public class Mensalidade {
     private BigDecimal jurosMora;
     @Column(name = "VALOR_PAGO")
     private BigDecimal valorPago;
+    @Column(name = "VENCIMENTO")
+    private LocalDate vencimento;
     @Column(name = "SITUACAO")
     @Enumerated(EnumType.STRING)
     private SituacaoMensalidade situacao = SituacaoMensalidade.PENDENTE;
     @Column(name = "FORMA_PAGAMENTO")
     @Enumerated(EnumType.STRING)
-    private FormaPagamento formaPagamento;
+    private FormaPagamento formaPagamento = FormaPagamento.AVISTA;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CONTRATO_ID")
     private Contrato contrato;
